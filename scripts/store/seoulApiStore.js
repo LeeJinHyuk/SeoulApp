@@ -11,8 +11,8 @@ let SeoulApiStore = Reflux.createStore({
         // 초기화
 
     },
-    onGetDayCareCenterInformation(postData) {
-
+    onGetDayCareCenterInformation() {
+        console.log("[SeoulApiStore] onGetDayCareCenterInformation");
     }
 
 });

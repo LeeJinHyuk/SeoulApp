@@ -5,6 +5,8 @@
 
 import React from "react";
 import Loading from "./loading/loading";
+import SeoulApiStore from "../store/seoulApiStore";
+import SeoulApiAction from "../action/seoulApiAction";
 
 class Container extends React.Component {
   constructor(props) {
@@ -12,50 +14,50 @@ class Container extends React.Component {
     this.state = {
       isLoading : false
     };
-  }
+  };
 
   componentWillMount() {
     console.log("[Container] componentWillMount");
 
-  }
+  };
 
   componentDidMount() {
     console.log("[Container] componentDidMount");
-
-  }
+    SeoulApiAction.getDayCareCenterInformation();
+  };
 
   componentWillReceiveProps() {
     console.log("[Container] componentWillReceiveProps");
 
-  }
+  };
 
   shouldComponentUpdate() {
     console.log("[Container] shouldComponentUpdate");
 
-  }
+  };
 
   componentWillUpdate() {
     console.log("[Container] componentWillUpdate");
 
-  }
+  };
 
   componentDidUpdate() {
     console.log("[Container] componentDidUpdate");
 
-  }
+  };
 
   componentWillUnMount() {
     console.log("[Container] componentWillUnMount");
 
-  }
+  };
 
   render() {
     return (
         <div id="container">
-          {this.state.isLoading ? <Loading /> : null}
+          <Loading isLoading={this.state.isLoading}/>
         </div>
     )
-  }
+  };
 }
 
 export default Container;
