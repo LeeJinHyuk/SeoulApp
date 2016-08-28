@@ -7,5 +7,5 @@ import ReactDom from "react-dom";
 import Container from "./view/container";
 
 window.onload = function() {
-  ReactDom.render(<Container />, document.getElementById("container"));
+  ReactDom.render(<Container />, document.getElementById("root"));
 };

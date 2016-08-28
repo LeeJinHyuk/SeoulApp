@@ -4,12 +4,13 @@
 "use strict";
 
 import React from "react";
+import Loading from "./loading/loading";
 
 class Container extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-
+      isLoading : false
     };
   }
 
@@ -49,7 +50,11 @@ class Container extends React.Component {
   }
 
   render() {
-    return null;
+    return (
+        <div id="container">
+          {this.state.isLoading ? <Loading /> : null}
+        </div>
+    )
   }
 }
 

@@ -44,7 +44,9 @@ class Loading extends React.Component {
   }
 
   render() {
-    return null;
+    return (
+        <div id="loading"></div>
+    )
   }
 }
 
