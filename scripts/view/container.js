@@ -4,10 +4,13 @@
 "use strict";
 
 import React from "react";
+import ReactMixin from "react-mixin";
+import Reflux from "reflux";
 import Loading from "./loading/loading";
 import SeoulApiStore from "../store/seoulApiStore";
 import SeoulApiAction from "../action/seoulApiAction";
 
+@ReactMixin.decorate(Reflux.listenTo(SeoulApiStore, "handleApiData"))
 class Container extends React.Component {
   constructor(props) {
     super(props);
@@ -23,6 +26,9 @@ class Container extends React.Component {
 
   componentDidMount() {
     console.log("[Container] componentDidMount");
+    this.setState = ({
+      isLoading : true
+    });
     SeoulApiAction.getDayCareCenterInformation();
   };
 
@@ -49,6 +55,10 @@ class Container extends React.Component {
   componentWillUnMount() {
     console.log("[Container] componentWillUnMount");
 
+  };
+
+  handleApiData(result) {
+    console.log("[Container] handleApiData");
   };
 
   render() {

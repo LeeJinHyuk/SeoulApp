@@ -13,6 +13,7 @@ let SeoulApiStore = Reflux.createStore({
     },
     onGetDayCareCenterInformation() {
         console.log("[SeoulApiStore] onGetDayCareCenterInformation");
+
     }
 
 });
