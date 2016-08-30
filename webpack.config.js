@@ -18,7 +18,8 @@ var config = {
                 test : /\.js$/,
                 loader : "babel",
                 query : {
-                    presets : ["es2015", "react"]
+                    presets : ["es2015", "react", "stage-0"],
+                    plugins: ['transform-decorators-legacy']
                 }
             },
             {
