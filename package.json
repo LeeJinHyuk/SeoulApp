@@ -23,6 +23,8 @@
     "react-mixin": "^3.0.5",
     "reflux": "^0.4.1",
     "style-loader": "^0.13.1",
+    "superagent": "^2.2.0",
+    "superagent-jsonp": "^0.1.1",
     "webpack": "^1.13.2"
   },
   "repository": {
