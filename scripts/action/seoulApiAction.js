@@ -4,7 +4,9 @@
 import Reflux from 'reflux';
 
 let SeoulApiAction = Reflux.createActions([
-    "getDayCareCenterInformation"
+    "getJobFairList",
+    "getrecuritmentList",
+    "getrecuritDetail"
 ]);
 
 export default SeoulApiAction;

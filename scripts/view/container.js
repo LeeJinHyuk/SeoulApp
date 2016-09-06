@@ -29,7 +29,8 @@ class Container extends React.Component {
     this.setState = ({
       isLoading : true
     });
-    SeoulApiAction.getDayCareCenterInformation();
+    SeoulApiAction.getJobFairList();
+    SeoulApiAction.getrecuritmentList();
   };
 
   componentWillReceiveProps() {
