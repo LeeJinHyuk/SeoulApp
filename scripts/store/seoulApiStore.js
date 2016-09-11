@@ -20,13 +20,12 @@ let SeoulApiStore = Reflux.createStore({
                 "http://openapi.mpm.go.kr/openapi/service/RetrievePblinsttEmpmnInfoService/getItem"
         };
     },
-    ajaxFactory : function(url) {
+    ajaxFactory : function(url, dataType) {
+
         $.ajax({
             url: url,
-            dataType : "jsonp",
+            dataType : dataType,
             method : "GET",
-            jsonp : false,
-            jsonpCallback: "jsonCallback",
             cache : true,
             success : function(data, text, xhr) {
                 console.log("success");
@@ -37,21 +36,24 @@ let SeoulApiStore = Reflux.createStore({
         });
     },
     onGetJobFairList() {
+        // 취업 설명회 리스트 요청 API
         console.log("[SeoulApiStore] onGetJobFairList");
-        this.ajaxFactory(this.data.jobFairUrl);
+        this.ajaxFactory(this.data.jobFairUrl, "jsonp");
     },
     onGetrecuritmentList() {
+        // TODO 취업공고 리스트 요청 방법 확인 필요(xml cors)
         console.log("[SeoulApiStore] onGetrecuritmentList");
-        this.ajaxFactory(this.data.recruitmentListUrl);
+        this.ajaxFactory(this.data.recruitmentListUrl, "jsonp");
     },
     onGetrecuritDetail(idx) {
+        // TODO 취업공고 상세정보 요청 방법 확인 필요(xml cors)
         console.log("[SeoulApiStore] onGetrecuritDetail");
         let requestUrl;
         
         requestUrl = this.data.recruitmentDetailUrl + "?idx=" + idx + 
                 "&ServiceKey=HF1eUr96KfQkuZe3Pl1v0stWJvCU8eH72E%2BPGfe%2BiUOMDUlk0P1%2FMgO4SpXf0qq74hzOF7ctuBDJl2L7aXXOsw%3D%3D" + 
             "&numOfRows=999&pageNo=1";
-        this.ajaxFactory(requestUrl);
+        this.ajaxFactory(requestUrl, "xml");
     }
 
 });

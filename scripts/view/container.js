@@ -30,7 +30,6 @@ class Container extends React.Component {
       isLoading : true
     });
     SeoulApiAction.getJobFairList();
-    SeoulApiAction.getrecuritmentList();
   };
 
   componentWillReceiveProps() {
