@@ -9,6 +9,11 @@ let SeoulApiStore = Reflux.createStore({
     listenables : [SeoulApiAction],
 
     init : function() {
+        this.TYPE = {
+            JOBFIARLIST : "jobFiarList",
+            RECURITLIST : "recuritList",
+            RECURITDETAIL : "recuritDetail"
+        };
         this.data = {
             jobFairUrl :
                 "http://openapi.seoul.go.kr:8088/4150495f3231303670726f6f636f737330/json/JobFairInfo/1/999/",
@@ -21,17 +26,18 @@ let SeoulApiStore = Reflux.createStore({
         };
     },
     ajaxFactory : function(url, dataType) {
-
+        let that = this;
         $.ajax({
             url: url,
             dataType : dataType,
             method : "GET",
             cache : true,
             success : function(data, text, xhr) {
-                console.log("success");
+                console.log("[SeoulApiStore] success");
+                that.trigger(data, that.TYPE.JOBFIARLIST, that.TYPE);
             },
             error : function (xhr, text, error) {
-                console.log("error");
+                console.log("[SeoulApiStore] error");
             }
         });
     },
