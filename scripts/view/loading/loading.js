@@ -1,11 +1,12 @@
 "use strict";
 
 import React from "react";
+import style from "./loading.css";
 
 class Loading extends React.Component {
   constructor(props) {
     super(props);
-
+    console.log("loading " + props);
   };
 
   componentWillMount() {
@@ -18,22 +19,22 @@ class Loading extends React.Component {
 
   };
 
-  componentWillReceiveProps() {
+  componentWillReceiveProps(nextProps) {
     console.log("[Loading] componentWillReceiveProps");
 
   };
 
-  shouldComponentUpdate() {
-    console.log("[Loading] shouldComponentUpdate");
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   console.log("[Loading] shouldComponentUpdate");
+  //
+  // };
 
-  };
-
-  componentWillUpdate() {
+  componentWillUpdate(nextProps, nextState) {
     console.log("[Loading] componentWillUpdate");
 
   };
 
-  componentDidUpdate() {
+  componentDidUpdate(prevProps, prevState) {
     console.log("[Loading] componentDidUpdate");
 
   };
