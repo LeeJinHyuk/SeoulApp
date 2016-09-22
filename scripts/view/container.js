@@ -8,6 +8,7 @@ import ReactMixin from "react-mixin";
 import Reflux from "reflux";
 import style from "./container.css";
 import Loading from "./loading/loading";
+import Navi from "./navi/navi";
 import SeoulApiStore from "../store/seoulApiStore";
 import SeoulApiAction from "../action/seoulApiAction";
 
@@ -18,15 +19,18 @@ class Container extends React.Component {
     this.state = {
       isLoading : false
     };
-    
+    // api 요청 후 실행될 콜백
     this.handleApiData = this.handleApiData.bind(this);
+    // 리스트 모드 변경 시 실행될 콜백
+    this.changeListMode = this.changeListMode.bind(this);
   };
 
   componentWillMount() {
     console.log("[Container] componentWillMount");
     // componentWillMount state 정리 구간. 단 re render는 하지 않음.
     this.setState({
-      isLoading : true
+      isLoading : true,
+      listType : 0 // 0 : 취업설명회, 1 : 채용 공고
     });
   };
 
@@ -65,15 +69,25 @@ class Container extends React.Component {
   handleApiData(result, type, typeList) {
     console.log("[Container] handleApiData");
     this.setState({
-      isLoading : false
+      isLoading : false,
+      
+    });
+  };
+
+  changeListMode(type) {
+    console.log("[Container] changeListMode");
+    this.setState({
+      listType : mode
     });
   };
 
   render() {
-    console.log("render " + this.state.isLoading);
     return (
         <div id="container">
           <Loading isLoading={this.state.isLoading}/>
+          <Navi 
+            changeListMode={this.changeListMode}>
+          </Navi>
         </div>
     )
   };
