@@ -6,7 +6,9 @@
 import React from "react";
 import ReactMixin from "react-mixin";
 import Reflux from "reflux";
+import PureRenderMixin from 'react-addons-pure-render-mixin';
 import style from "./container.css";
+import GD from "../globalData";
 import Loading from "./loading/loading";
 import Navi from "./navi/navi";
 import SeoulApiStore from "../store/seoulApiStore";
@@ -17,12 +19,15 @@ class Container extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isLoading : false
+      isLoading : false,
+      naviType : GD.NAVITYPE.JOBFAIR
     };
+    // shouldComponentUpdate 성능 향상 모듈 실행
+    this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
     // api 요청 후 실행될 콜백
     this.handleApiData = this.handleApiData.bind(this);
-    // 리스트 모드 변경 시 실행될 콜백
-    this.changeListMode = this.changeListMode.bind(this);
+    // 네비 타입 변경 시 실행될 콜백
+    this.changeNaviType = this.changeNaviType.bind(this);
   };
 
   componentWillMount() {
@@ -30,7 +35,7 @@ class Container extends React.Component {
     // componentWillMount state 정리 구간. 단 re render는 하지 않음.
     this.setState({
       isLoading : true,
-      listType : 0 // 0 : 취업설명회, 1 : 채용 공고
+      naviType : GD.NAVITYPE.JOBFAIR
     });
   };
 
@@ -46,10 +51,11 @@ class Container extends React.Component {
 
   };
 
-  shouldComponentUpdate(nextProps, nextState) {
-    console.log("[Container] shouldComponentUpdate");
-    return ((this.state.isLoading === nextState.isLoading) ? false : true);
-  };
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   console.log("[Container] shouldComponentUpdate");
+  //   // 현재 로딩바 노출 상태가 다를 경우에만 랜더링 수행
+  //   return ((this.state.isLoading === nextState.isLoading) ? false : true);
+  // };
 
   componentWillUpdate(nextProps, nextState) {
     console.log("[Container] componentWillUpdate");
@@ -74,10 +80,20 @@ class Container extends React.Component {
     });
   };
 
-  changeListMode(type) {
+  changeNaviType(e) {
     console.log("[Container] changeListMode");
+    let naviType;
+
+    switch(e.target.textContent) {
+      case GD.TITLE.JOBFAIR :
+            naviType = GD.NAVITYPE.JOBFAIR;
+            break;
+      case GD.TITLE.EMPLOYMENT_NOTICE :
+            naviType = GD.NAVITYPE.EMPLOYMENT_NOTICE;
+            break;
+    }
     this.setState({
-      listType : mode
+      naviType : naviType
     });
   };
 
@@ -85,8 +101,9 @@ class Container extends React.Component {
     return (
         <div id="container">
           <Loading isLoading={this.state.isLoading}/>
-          <Navi 
-            changeListMode={this.changeListMode}>
+          <Navi
+              naviType={this.state.naviType}
+              changeNaviType={this.changeNaviType}>
           </Navi>
         </div>
     )
