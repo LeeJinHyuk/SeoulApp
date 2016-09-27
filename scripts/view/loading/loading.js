@@ -1,7 +1,7 @@
 "use strict";
 
 import React from "react";
-import style from "./loading.css";
+import style from "./loading.less";
 
 class Loading extends React.Component {
   constructor(props) {

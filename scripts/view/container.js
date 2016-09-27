@@ -7,7 +7,7 @@ import React from "react";
 import ReactMixin from "react-mixin";
 import Reflux from "reflux";
 import PureRenderMixin from 'react-addons-pure-render-mixin';
-import style from "./container.css";
+import style from "./container.less";
 import GD from "../globalData";
 import Loading from "./loading/loading";
 import Navi from "./navi/navi";

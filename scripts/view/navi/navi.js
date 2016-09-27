@@ -3,7 +3,7 @@
  */
 import React from "react";
 import GD from "../../globalData";
-import style from "./navi.css";
+import style from "./navi.less";
 
 class Navi extends React.Component {
     constructor(props) {
@@ -50,9 +50,19 @@ class Navi extends React.Component {
             (this.props.naviType === GD.NAVITYPE.JOBFAIR || this.props.naviType === GD.NAVITYPE.EMPLOYMENT_NOTICE)
                 ?
                 <div className="navi">
-                    <span>{this.props.naviType === GD.NAVITYPE.JOBFAIR ? GD.TITLE.JOBFAIR : GD.TITLE.EMPLOYMENT_NOTICE}</span>
-                    <span onClick={this.props.changeNaviType}>{GD.TITLE.JOBFAIR}</span>
-                    <span onClick={this.props.changeNaviType}>{GD.TITLE.EMPLOYMENT_NOTICE}</span>
+                    <div className="title">
+                        <span>
+                            {this.props.naviType === GD.NAVITYPE.JOBFAIR ? GD.TITLE.JOBFAIR : GD.TITLE.EMPLOYMENT_NOTICE}
+                        </span>
+                    </div>
+                    <div className="tab">
+                        <span onClick={this.props.changeNaviType}>
+                            {GD.TITLE.JOBFAIR}
+                        </span>
+                        <span onClick={this.props.changeNaviType}>
+                            {GD.TITLE.EMPLOYMENT_NOTICE}
+                        </span>
+                    </div>
                 </div>
                 :
                 <div></div>
