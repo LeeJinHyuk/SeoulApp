@@ -7,12 +7,13 @@ import React from "react";
 import ReactMixin from "react-mixin";
 import Reflux from "reflux";
 import PureRenderMixin from 'react-addons-pure-render-mixin';
-import style from "./container.less";
 import GD from "../globalData";
 import Loading from "./loading/loading";
 import Navi from "./navi/navi";
+import JobFairList from "./list/jobFairList";
 import SeoulApiStore from "../store/seoulApiStore";
 import SeoulApiAction from "../action/seoulApiAction";
+import style from "./container.less";
 
 @ReactMixin.decorate(Reflux.listenTo(SeoulApiStore, "handleApiData"))
 class Container extends React.Component {
@@ -20,7 +21,8 @@ class Container extends React.Component {
     super(props);
     this.state = {
       isLoading : false,
-      naviType : GD.NAVITYPE.JOBFAIR
+      naviType : GD.NAVITYPE.JOBFAIR,
+      listData : undefined
     };
     // shouldComponentUpdate 성능 향상 모듈 실행
     this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
@@ -45,10 +47,10 @@ class Container extends React.Component {
     SeoulApiAction.getJobFairList();
   };
 
-  componentWillReceiveProps(nextProps) {
-    console.log("[Container] componentWillReceiveProps");
-
-  };
+  // componentWillReceiveProps(nextProps) {
+  //   console.log("[Container] componentWillReceiveProps");
+  //
+  // };
 
   // shouldComponentUpdate(nextProps, nextState) {
   //   console.log("[Container] shouldComponentUpdate");
@@ -56,20 +58,20 @@ class Container extends React.Component {
   //   return ((this.state.isLoading === nextState.isLoading) ? false : true);
   // };
 
-  componentWillUpdate(nextProps, nextState) {
-    console.log("[Container] componentWillUpdate");
-
-  };
-
-  componentDidUpdate(prevProps, prevState) {
-    console.log("[Container] componentDidUpdate");
-
-  };
-
-  componentWillUnMount() {
-    console.log("[Container] componentWillUnMount");
-
-  };
+  // componentWillUpdate(nextProps, nextState) {
+  //   console.log("[Container] componentWillUpdate");
+  //
+  // };
+  //
+  // componentDidUpdate(prevProps, prevState) {
+  //   console.log("[Container] componentDidUpdate");
+  //
+  // };
+  //
+  // componentWillUnMount() {
+  //   console.log("[Container] componentWillUnMount");
+  //
+  // };
 
   handleApiData(result, type, typeList) {
     console.log("[Container] handleApiData");
@@ -89,7 +91,8 @@ class Container extends React.Component {
 
     this.setState({
       isLoading : false,
-      naviType : naviType
+      naviType : naviType,
+      listData : result
     });
   };
 
@@ -117,10 +120,13 @@ class Container extends React.Component {
     return (
         <div id="container">
           <Loading isLoading={this.state.isLoading}/>
-          <Navi
+          <Navi 
               naviType={this.state.naviType}
               changeNaviType={this.changeNaviType}>
           </Navi>
+          <JobFairList
+              listData={this.state.listData}>
+          </JobFairList>
         </div>
     )
   };

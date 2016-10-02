@@ -11,18 +11,18 @@ class Navi extends React.Component {
 
     };
 
-    componentWillMount() {
-        console.log("[Navi] componentWillMount");
-    };
+    // componentWillMount() {
+    //     console.log("[Navi] componentWillMount");
+    // };
+    //
+    // componentDidMount() {
+    //     console.log("[Navi] componentDidMount");
+    //
+    // };
 
-    componentDidMount() {
-        console.log("[Navi] componentDidMount");
-
-    };
-
-    componentWillReceiveProps(nextProps) {
-        console.log("[Navi] componentWillReceiveProps");
-    };
+    // componentWillReceiveProps(nextProps) {
+    //     console.log("[Navi] componentWillReceiveProps");
+    // };
 
     shouldComponentUpdate(nextProps, nextState) {
         console.log("[Navi] shouldComponentUpdate");
@@ -30,20 +30,20 @@ class Navi extends React.Component {
         return ((this.props.naviType === nextProps.naviType) ? false : true);
     };
 
-    componentWillUpdate(nextProps, nextState) {
-        console.log("[Navi] componentWillUpdate");
-
-    };
-
-    componentDidUpdate(prevProps, prevState) {
-        console.log("[Navi] componentDidUpdate");
-
-    };
-
-    componentWillUnMount() {
-        console.log("[Navi] componentWillUnMount");
-
-    };
+    // componentWillUpdate(nextProps, nextState) {
+    //     console.log("[Navi] componentWillUpdate");
+    //
+    // };
+    //
+    // componentDidUpdate(prevProps, prevState) {
+    //     console.log("[Navi] componentDidUpdate");
+    //
+    // };
+    //
+    // componentWillUnMount() {
+    //     console.log("[Navi] componentWillUnMount");
+    //
+    // };
     
     render() {
         return (
