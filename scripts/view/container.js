@@ -42,7 +42,6 @@ class Container extends React.Component {
   componentDidMount() {
     console.log("[Container] componentDidMount");
     // 최상위 컴포넌트 마운트 완료 시 데이터 요청
-    // TODO 로컬스토리지 또는 디바이스 저장소 데이터 유무에 따라 요청/미요청 로직 추가 필요
     SeoulApiAction.getJobFairList();
   };
 
@@ -74,27 +73,44 @@ class Container extends React.Component {
 
   handleApiData(result, type, typeList) {
     console.log("[Container] handleApiData");
+    let naviType;
+
+    switch(type) {
+      case typeList.JOBFIARLIST:
+        naviType = GD.NAVITYPE.JOBFAIR;
+        break;
+      case typeList.RECURITLIST:
+        naviType = GD.NAVITYPE.EMPLOYMENT_NOTICE;
+        break;
+      case typeList.RECURITDETAIL:
+        naviType = GD.NAVITYPE.DETAIL;
+        break;
+    }
+
     this.setState({
       isLoading : false,
-      
+      naviType : naviType
     });
   };
 
   changeNaviType(e) {
-    console.log("[Container] changeListMode");
-    let naviType;
+    console.log("[Container] changeNaviType");
+    if ((this.state.naviType === GD.NAVITYPE.JOBFAIR && e.target.textContent !== GD.TITLE.JOBFAIR) ||
+        (this.state.naviType === GD.NAVITYPE.EMPLOYMENT_NOTICE && e.target.textContent !== GD.TITLE.EMPLOYMENT_NOTICE)) {
+      // 현재 상태와 같은 탭을 누르지 않는 경우에만 로딩
+      this.setState({
+        isLoading : true
+      });
+    }
 
     switch(e.target.textContent) {
       case GD.TITLE.JOBFAIR :
-            naviType = GD.NAVITYPE.JOBFAIR;
-            break;
+        SeoulApiAction.getJobFairList();
+        break;
       case GD.TITLE.EMPLOYMENT_NOTICE :
-            naviType = GD.NAVITYPE.EMPLOYMENT_NOTICE;
-            break;
+        // TODO 취업 공고 부분 구현 필요
+        break;
     }
-    this.setState({
-      naviType : naviType
-    });
   };
 
   render() {
