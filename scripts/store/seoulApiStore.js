@@ -42,8 +42,13 @@ let SeoulApiStore = Reflux.createStore({
                 console.log("[SeoulApiStore] success");
                 switch(url) {
                     case that.API.jobFairUrl:
-                        localStorage.setItem(GD.STORAGE_KEY.JOBFAIR, JSON.stringify(data));
-                        that.trigger(data, that.TYPE.JOBFIARLIST, that.TYPE);
+                        if (data && data.JobFairInfo && data.JobFairInfo.RESULT &&
+                            data.JobFairInfo.RESULT.CODE === "INFO-000") {
+                            localStorage.setItem(GD.STORAGE_KEY.JOBFAIR, JSON.stringify(data));
+                            that.trigger(data, that.TYPE.JOBFIARLIST, that.TYPE);
+                        } else {
+                            that.trigger(undefined, that.TYPE.JOBFIARLIST, that.TYPE);
+                        }
                         break;
                 }
             },
