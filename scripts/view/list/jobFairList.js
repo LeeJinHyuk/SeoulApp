@@ -12,7 +12,8 @@ class JobFairList extends React.Component {
         super(props);
         this.state = {
             listMode : GD.JOBLISTMODE.TOTAL,
-            listData : undefined
+            listData : undefined,
+            conditionMode : false
         };
 
         // shouldComponentUpdate 성능 향상 모듈 실행
@@ -21,6 +22,8 @@ class JobFairList extends React.Component {
         this.rearrangeListData = this.rearrangeListData.bind(this);
         // 리스트 아이템 생성
         this.makeItem = this.makeItem.bind(this);
+        // 리스트 모드 변경
+        this.changeCondition = this.changeCondition.bind(this);
     };
 
     // componentWillMount() {
@@ -65,7 +68,8 @@ class JobFairList extends React.Component {
         if (this.state.listMode === GD.JOBLISTMODE.TOTAL) {
             // 전체 데이터
             this.setState({
-                listData : nextProps.listData
+                listData : nextProps.listData,
+                conditionMode : false
             });
         } else {
             // 이번 년도 데이터
@@ -83,7 +87,8 @@ class JobFairList extends React.Component {
             }
 
             this.setState({
-                listData : tmpListData
+                listData : tmpListData,
+                conditionMode : false
             });
         }
     };
@@ -109,12 +114,18 @@ class JobFairList extends React.Component {
         return itemTag;
     };
 
+    changeCondition(e) {
+        this.setState({
+            conditionMode : true
+        });
+    };
+
     render() {
         return (
             this.state.listData !== undefined
                 ?
                 <div className="jobFairList">
-                    <div className="conditionTab">
+                    <div className="conditionTab" onClick={this.changeCondition}>
                         {
                             this.state.listMode === GD.JOBLISTMODE.TOTAL
                                 ?
@@ -124,12 +135,18 @@ class JobFairList extends React.Component {
                         }
                     </div>
                     {this.makeItem()}
-                    <div className="conditionPopup deactivate">
-                        <ul>
-                            <li>전체기간</li>
-                            <li>{new Date().getFullYear().toString()}</li>
-                        </ul>
-                    </div>
+                    {
+                        this.state.conditionMode === true
+                            ?
+                            <div className="conditionPopup">
+                                <ul>
+                                    <li>전체기간</li>
+                                    <li>{new Date().getFullYear().toString()}</li>
+                                </ul>
+                            </div>
+                            :
+                            null
+                    }
                 </div>
                 :
                 null

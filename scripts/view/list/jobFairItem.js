@@ -25,10 +25,10 @@ class JobFairItem extends React.Component {
 
     };
 
-    shouldComponentUpdate(nextProps, nextState) {
-        console.log("[JobFairItem] shouldComponentUpdate");
-
-    };
+    // shouldComponentUpdate(nextProps, nextState) {
+    //     console.log("[JobFairItem] shouldComponentUpdate");
+    //
+    // };
 
     componentWillUpdate(nextProps, nextState) {
         console.log("[JobFairItem] componentWillUpdate");
