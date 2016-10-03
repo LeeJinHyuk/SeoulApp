@@ -46,8 +46,8 @@ class JobFairItem extends React.Component {
 
     render() {
         return (
-            <li></li>
+            <div id="test">{this.props.itemData.JOBFAIR_NAME}</div>
         )
     };
-
-    export default JobFairItem;
+}
+export default JobFairItem;
