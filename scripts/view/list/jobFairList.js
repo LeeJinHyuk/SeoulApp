@@ -97,6 +97,7 @@ class JobFairList extends React.Component {
                     <JobFairItem
                         itemData={item}
                         key={i}
+                        index={i}
                     >
                     </JobFairItem>
                 );

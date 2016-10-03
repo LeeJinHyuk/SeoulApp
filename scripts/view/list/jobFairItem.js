@@ -2,6 +2,7 @@
  * Created by eerto_000 on 2016-09-22.
  */
 import React from "react";
+import style from "./jobFairItem.less";
     
 class JobFairItem extends React.Component {
     constructor(props) {
@@ -46,7 +47,23 @@ class JobFairItem extends React.Component {
 
     render() {
         return (
-            <div id="test">{this.props.itemData.JOBFAIR_NAME}</div>
+            <div className={"item index_" + this.props.index}>
+                <div>
+                    <span>{this.props.itemData.JOBFAIR_YEAR}</span>
+                </div>
+                <div>
+                    <span>{this.props.itemData.JOBFAIR_NAME}</span>
+                </div>
+                <div>
+                    <span>{this.props.itemData.JOBFAIR_DATE} </span>
+                    <span>{this.props.itemData.JOBFAIR_FRTIME}</span>
+                    <span> ~ </span>
+                    <span>{this.props.itemData.JOBFAIR_EDTIME}</span>
+                </div>
+                <div>
+                    <span>{this.props.itemData.JOBFAIR_JOINT_AUSPICES}</span>
+                </div>
+            </div>
         )
     };
 }
