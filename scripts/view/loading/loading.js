@@ -6,18 +6,19 @@ import style from "./loading.less";
 class Loading extends React.Component {
   constructor(props) {
     super(props);
+
   };
 
   // componentWillMount() {
   //   console.log("[Loading] componentWillMount");
   //
   // };
-  //
+
   // componentDidMount() {
   //   console.log("[Loading] componentDidMount");
   //
   // };
-  //
+
   // componentWillReceiveProps(nextProps) {
   //   console.log("[Loading] componentWillReceiveProps");
   //
@@ -32,12 +33,12 @@ class Loading extends React.Component {
   //   console.log("[Loading] componentWillUpdate");
   //
   // };
-  //
+
   // componentDidUpdate(prevProps, prevState) {
   //   console.log("[Loading] componentDidUpdate");
   //
   // };
-  //
+
   // componentWillUnMount() {
   //   console.log("[Loading] componentWillUnMount");
   //
@@ -45,7 +46,14 @@ class Loading extends React.Component {
 
   render() {
     return (
-        this.props.isLoading ? <div id="loading"></div> : null
+        this.props.isLoading 
+            ? 
+            <div className="loadingContainer">
+              <div className="loadingBackground"></div>
+              <div className="loading"></div>
+            </div>
+            : 
+            null
     )
   };
 }
