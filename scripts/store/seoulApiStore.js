@@ -11,24 +11,21 @@ let SeoulApiStore = Reflux.createStore({
 
     init : function() {
         let tmpJobFairData = localStorage.getItem(GD.STORAGE_KEY.JOBFAIR);
+        let tmpEmploymentNoticeData = localStorage.getItem(GD.STORAGE_KEY.EMPLOYMENT_NOTICE);
 
         this.TYPE = {
             JOBFIARLIST : "jobFiarList",
-            RECURITLIST : "recuritList",
-            RECURITDETAIL : "recuritDetail"
+            EMPLOYMENT_NOTICE_LIST : "employmentNoticeList"
         };
         this.API = {
             jobFairUrl :
                 "http://openapi.seoul.go.kr:8088/4150495f3231303670726f6f636f737330/json/JobFairInfo/1/999/",
-            recruitmentListUrl :
-                "http://openapi.mpm.go.kr/openapi/service/RetrievePblinsttEmpmnInfoService/getList" +
-                "?ServiceKey=HF1eUr96KfQkuZe3Pl1v0stWJvCU8eH72E%2BPGfe%2BiUOMDUlk0P1%2FMgO4SpXf0qq74hzOF7ctuBDJl2L7aXXOsw%3D%3D" +
-                "&numOfRows=999&pageNo=1",
-            recruitmentDetailUrl :
-                "http://openapi.mpm.go.kr/openapi/service/RetrievePblinsttEmpmnInfoService/getItem"
+            employmentNoticeUrl :
+                "http://openapi.seoul.go.kr:8088/4150495f3231303670726f6f636f737330/json/GetJobInfo/1/1000/"
         };
         this.list = {
-            jobFair : tmpJobFairData !== undefined ? JSON.parse(tmpJobFairData) : undefined // 채용설명회 리스트 데이터
+            jobFair : tmpJobFairData !== undefined ? JSON.parse(tmpJobFairData) : undefined, // 채용설명회 리스트 데이터
+            employmentNotice : tmpEmploymentNoticeData !== undefined ? JSON.parse(tmpEmploymentNoticeData) : undefined // 채용공고 리스트 데이터
         };
     },
     ajaxFactory : function(url, dataType) {
@@ -36,21 +33,58 @@ let SeoulApiStore = Reflux.createStore({
         $.ajax({
             url: url,
             dataType : dataType,
+            jsonpCallback: 'callback',
+            contentType : "application/json",
             method : "GET",
             cache : true,
             success : function(data, text, xhr) {
                 console.log("[SeoulApiStore] success");
-                switch(url) {
-                    case that.API.jobFairUrl:
-                        if (data && data.JobFairInfo && data.JobFairInfo.RESULT &&
-                            data.JobFairInfo.RESULT.CODE === "INFO-000" &&
-                            data.JobFairInfo.list_total_count > 0) {
-                            localStorage.setItem(GD.STORAGE_KEY.JOBFAIR, JSON.stringify(data.JobFairInfo.row));
-                            that.trigger(data.JobFairInfo.row, that.TYPE.JOBFIARLIST, that.TYPE);
+                if (url.indexOf("JobFairInfo") > -1) {
+                    if (data && data.JobFairInfo && data.JobFairInfo.RESULT &&
+                        data.JobFairInfo.RESULT.CODE === "INFO-000" &&
+                        data.JobFairInfo.list_total_count > 0) {
+                        localStorage.setItem(GD.STORAGE_KEY.JOBFAIR, JSON.stringify(data.JobFairInfo.row));
+                        that.list.jobFair = data.JobFairInfo.row;
+                        that.trigger(data.JobFairInfo.row, that.TYPE.JOBFIARLIST, that.TYPE);
+                    } else {
+                        that.list.jobFair = undefined;
+                        that.trigger(undefined, that.TYPE.JOBFIARLIST, that.TYPE);
+                    }
+                } else if (url.indexOf("GetJobInfo") > -1) {
+                    let tokenArray;
+                    let newUrl;
+
+                    if (data && data.GetJobInfo && data.GetJobInfo.RESULT &&
+                        data.GetJobInfo.RESULT.CODE === "INFO-000" &&
+                        data.GetJobInfo.list_total_count > 0) {
+
+                        if (that.list.employmentNotice) {
+                            // 데이터 존재
+                            that.list.employmentNotice =
+                                that.list.employmentNotice.concat(data.GetJobInfo.row);
                         } else {
-                            that.trigger(undefined, that.TYPE.JOBFIARLIST, that.TYPE);
+                            // 데이터 미존재. 첫 시도
+                            that.list.employmentNotice = data.GetJobInfo.row;
                         }
-                        break;
+
+                        tokenArray = url.split("/");
+                        console.log("tokenArray : " + JSON.stringify(tokenArray));
+                        newUrl = tokenArray[0] + "/" + tokenArray[1] + "/" + tokenArray[2] + "/" + tokenArray[3] + "/" +
+                            tokenArray[4] + "/" + tokenArray[5] + "/" +
+                            (Number(tokenArray[6], 10) + 1000) + "/" + (Number(tokenArray[7], 10) + 1000) + "/";
+                        console.log("newUrl : " + newUrl);
+                        if (data.GetJobInfo.list_total_count > (Number(tokenArray[6], 10) + 1000)) {
+                            // 총 데이터가 시작보다 클 경우 추가 요청
+                            that.ajaxFactory(newUrl, "jsonp");
+                        } else {
+                            // 총 데이터가 더 작을 경우 요청 중지
+                            localStorage.setItem(GD.STORAGE_KEY.EMPLOYMENT_NOTICE, JSON.stringify(that.list.employmentNotice));
+                            that.trigger(that.list.employmentNotice, that.TYPE.EMPLOYMENT_NOTICE_LIST, that.TYPE);
+                        }
+                    } else {
+                        that.list.employmentNotice = undefined;
+                        that.trigger(undefined, that.TYPE.EMPLOYMENT_NOTICE_LIST, that.TYPE);
+                    }
                 }
             },
             error : function (xhr, text, error) {
@@ -71,20 +105,17 @@ let SeoulApiStore = Reflux.createStore({
             this.ajaxFactory(this.API.jobFairUrl, "jsonp");
         }
     },
-    onGetrecuritmentList() {
-        // TODO 취업공고 리스트 요청 방법 확인 필요(xml cors)
-        console.log("[SeoulApiStore] onGetrecuritmentList");
-        this.ajaxFactory(this.API.recruitmentListUrl, "jsonp");
-    },
-    onGetrecuritDetail(idx) {
-        // TODO 취업공고 상세정보 요청 방법 확인 필요(xml cors)
-        console.log("[SeoulApiStore] onGetrecuritDetail");
-        let requestUrl;
-        
-        requestUrl = this.API.recruitmentDetailUrl + "?idx=" + idx +
-                "&ServiceKey=HF1eUr96KfQkuZe3Pl1v0stWJvCU8eH72E%2BPGfe%2BiUOMDUlk0P1%2FMgO4SpXf0qq74hzOF7ctuBDJl2L7aXXOsw%3D%3D" + 
-            "&numOfRows=999&pageNo=1";
-        this.ajaxFactory(requestUrl, "xml");
+    onGetEmploymentNoticeList() {
+        console.log("[SeoulApiStore] onGetEmploymentNoticeList");
+        if (this.list.employmentNotice) {
+            // 이미 받아온 데이터가 존재할 경우 로컬스토리지 데이터 사용
+            console.log("[SeoulApiStore] onGetEmploymentNoticeList local data");
+            this.trigger(this.list.employmentNotice, this.TYPE.EMPLOYMENT_NOTICE_LIST, this.TYPE);
+        } else {
+            // 없는 경우 서버에서 데이터 요청
+            console.log("[SeoulApiStore] onGetEmploymentNoticeList server data");
+            this.ajaxFactory(this.API.employmentNoticeUrl, "jsonp");
+        }
     }
 
 });

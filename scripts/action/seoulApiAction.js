@@ -5,8 +5,7 @@ import Reflux from 'reflux';
 
 let SeoulApiAction = Reflux.createActions([
     "getJobFairList",
-    "getrecuritmentList",
-    "getrecuritDetail"
+    "getEmploymentNoticeList"
 ]);
 
 export default SeoulApiAction;
