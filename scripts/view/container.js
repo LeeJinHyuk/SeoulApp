@@ -81,7 +81,7 @@ class Container extends React.Component {
       case typeList.JOBFIARLIST:
         naviType = GD.NAVITYPE.JOBFAIR;
         break;
-      case typeList.RECURITLIST:
+      case typeList.EMPLOYMENT_NOTICE_LIST:
         naviType = GD.NAVITYPE.EMPLOYMENT_NOTICE;
         break;
       case typeList.RECURITDETAIL:
@@ -102,7 +102,8 @@ class Container extends React.Component {
         (this.state.naviType === GD.NAVITYPE.EMPLOYMENT_NOTICE && e.target.textContent !== GD.TITLE.EMPLOYMENT_NOTICE)) {
       // 현재 상태와 같은 탭을 누르지 않는 경우에만 로딩
       this.setState({
-        isLoading : true
+        isLoading : true,
+        naviType : e.target.textContent === GD.TITLE.JOBFAIR ? GD.NAVITYPE.JOBFAIR : GD.NAVITYPE.EMPLOYMENT_NOTICE
       });
     }
 
@@ -111,7 +112,7 @@ class Container extends React.Component {
         SeoulApiAction.getJobFairList();
         break;
       case GD.TITLE.EMPLOYMENT_NOTICE :
-        // TODO 취업 공고 부분 구현 필요
+        SeoulApiAction.getEmploymentNoticeList();
         break;
     }
   };
@@ -124,9 +125,15 @@ class Container extends React.Component {
               naviType={this.state.naviType}
               changeNaviType={this.changeNaviType}>
           </Navi>
-          <JobFairList
-              listData={this.state.listData}>
-          </JobFairList>
+          {
+              this.state.naviType === GD.NAVITYPE.JOBFAIR
+                  ?
+                  <JobFairList
+                      listData={this.state.listData}>
+                  </JobFairList>
+                  :
+                  null
+          }
         </div>
     )
   };
