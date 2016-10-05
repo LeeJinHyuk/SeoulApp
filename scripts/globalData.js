@@ -18,6 +18,10 @@ const GD = {
     JOBLISTMODE : {
         TOTAL : 0, // 취업설명회 리스트 전체
         CURRENT_YEAR : 1 // 취업설명회 이번 년도
+    },
+    APICALL_TYPE : {
+        START : 0, // 시작 시 API CALL
+        TAB : 1 // TAB 으로 API CALL
     }
 }
 
