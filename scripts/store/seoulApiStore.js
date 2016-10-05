@@ -33,8 +33,6 @@ let SeoulApiStore = Reflux.createStore({
         $.ajax({
             url: url,
             dataType : dataType,
-            jsonpCallback: 'callback',
-            contentType : "application/json",
             method : "GET",
             cache : true,
             success : function(data, text, xhr) {
@@ -45,11 +43,11 @@ let SeoulApiStore = Reflux.createStore({
                         data.JobFairInfo.list_total_count > 0) {
                         localStorage.setItem(GD.STORAGE_KEY.JOBFAIR, JSON.stringify(data.JobFairInfo.row));
                         that.list.jobFair = data.JobFairInfo.row;
-                        that.trigger(data.JobFairInfo.row, that.TYPE.JOBFIARLIST, that.TYPE);
                     } else {
                         that.list.jobFair = undefined;
-                        that.trigger(undefined, that.TYPE.JOBFIARLIST, that.TYPE);
                     }
+                    // 취업 설명회 데이터 수신 완료 되더라도 채용 공고 수신이 완료되지 않기 때문에 trigger하지 않는다.
+                    //that.trigger(that.list.jobFair, that.TYPE.JOBFIARLIST, that.TYPE);
                 } else if (url.indexOf("GetJobInfo") > -1) {
                     let tokenArray;
                     let newUrl;
@@ -79,12 +77,15 @@ let SeoulApiStore = Reflux.createStore({
                         } else {
                             // 총 데이터가 더 작을 경우 요청 중지
                             localStorage.setItem(GD.STORAGE_KEY.EMPLOYMENT_NOTICE, JSON.stringify(that.list.employmentNotice));
-                            that.trigger(that.list.employmentNotice, that.TYPE.EMPLOYMENT_NOTICE_LIST, that.TYPE);
+                            that.trigger(that.list.jobFair, that.TYPE.JOBFIARLIST, that.TYPE);
+                            //that.trigger(that.list.employmentNotice, that.TYPE.EMPLOYMENT_NOTICE_LIST, that.TYPE);
                         }
                     } else {
                         that.list.employmentNotice = undefined;
-                        that.trigger(undefined, that.TYPE.EMPLOYMENT_NOTICE_LIST, that.TYPE);
+                        that.trigger(that.list.jobFair, that.TYPE.JOBFIARLIST, that.TYPE);
+                        //that.trigger(undefined, that.TYPE.EMPLOYMENT_NOTICE_LIST, that.TYPE);
                     }
+                    
                 }
             },
             error : function (xhr, text, error) {
@@ -92,7 +93,7 @@ let SeoulApiStore = Reflux.createStore({
             }
         });
     },
-    onGetJobFairList() {
+    onGetJobFairList(callType) {
         // 취업 설명회 리스트 요청 API
         console.log("[SeoulApiStore] onGetJobFairList");
         if (this.list.jobFair) {
@@ -105,12 +106,14 @@ let SeoulApiStore = Reflux.createStore({
             this.ajaxFactory(this.API.jobFairUrl, "jsonp");
         }
     },
-    onGetEmploymentNoticeList() {
+    onGetEmploymentNoticeList(callType) {
         console.log("[SeoulApiStore] onGetEmploymentNoticeList");
         if (this.list.employmentNotice) {
             // 이미 받아온 데이터가 존재할 경우 로컬스토리지 데이터 사용
             console.log("[SeoulApiStore] onGetEmploymentNoticeList local data");
-            this.trigger(this.list.employmentNotice, this.TYPE.EMPLOYMENT_NOTICE_LIST, this.TYPE);
+            if (callType === GD.APICALL_TYPE.TAB) {
+                this.trigger(this.list.employmentNotice, this.TYPE.EMPLOYMENT_NOTICE_LIST, this.TYPE);
+            }
         } else {
             // 없는 경우 서버에서 데이터 요청
             console.log("[SeoulApiStore] onGetEmploymentNoticeList server data");

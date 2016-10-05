@@ -44,7 +44,8 @@ class Container extends React.Component {
   componentDidMount() {
     console.log("[Container] componentDidMount");
     // 최상위 컴포넌트 마운트 완료 시 데이터 요청
-    SeoulApiAction.getJobFairList();
+    SeoulApiAction.getJobFairList(GD.APICALL_TYPE.START);
+    SeoulApiAction.getEmploymentNoticeList(GD.APICALL_TYPE.START);
   };
 
   // componentWillReceiveProps(nextProps) {
@@ -109,10 +110,10 @@ class Container extends React.Component {
 
     switch(e.target.textContent) {
       case GD.TITLE.JOBFAIR :
-        SeoulApiAction.getJobFairList();
+        SeoulApiAction.getJobFairList(GD.APICALL_TYPE.TAB);
         break;
       case GD.TITLE.EMPLOYMENT_NOTICE :
-        SeoulApiAction.getEmploymentNoticeList();
+        SeoulApiAction.getEmploymentNoticeList(GD.APICALL_TYPE.TAB);
         break;
     }
   };
