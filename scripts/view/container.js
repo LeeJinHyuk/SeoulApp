@@ -77,7 +77,6 @@ class Container extends React.Component {
   handleApiData(result, type, typeList) {
     console.log("[Container] handleApiData");
     let naviType;
-
     switch(type) {
       case typeList.JOBFIARLIST:
         naviType = GD.NAVITYPE.JOBFAIR;

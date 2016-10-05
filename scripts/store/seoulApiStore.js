@@ -28,7 +28,7 @@ let SeoulApiStore = Reflux.createStore({
             employmentNotice : tmpEmploymentNoticeData !== undefined ? JSON.parse(tmpEmploymentNoticeData) : undefined // 채용공고 리스트 데이터
         };
     },
-    ajaxFactory : function(url, dataType) {
+    ajaxFactory : function(url, dataType, callType) {
         let that = this;
         $.ajax({
             url: url,
@@ -73,17 +73,21 @@ let SeoulApiStore = Reflux.createStore({
                         console.log("newUrl : " + newUrl);
                         if (data.GetJobInfo.list_total_count > (Number(tokenArray[6], 10) + 1000)) {
                             // 총 데이터가 시작보다 클 경우 추가 요청
+                            if (callType === GD.APICALL_TYPE.START) {
+                                // 첫 스타트일 경우 첫 데이터 1000개만 가지고온 후 트리거 하여 로딩을 제거
+                                // 나머지는 비동기로 백그라운드에서 계속 요청하면서 갱신한다.
+                                that.trigger(that.list.jobFair, that.TYPE.JOBFIARLIST, that.TYPE);
+                            }
                             that.ajaxFactory(newUrl, "jsonp");
                         } else {
                             // 총 데이터가 더 작을 경우 요청 중지
+                            // TODO 지금은 첫요청만 처리하기 때문에 여기서 트리거하는 부분이 없지만
+                            // TODO 새로고침 기능이 추가되면 타입에 따라 여기서도 트리거를 해줘야한다.
                             localStorage.setItem(GD.STORAGE_KEY.EMPLOYMENT_NOTICE, JSON.stringify(that.list.employmentNotice));
-                            that.trigger(that.list.jobFair, that.TYPE.JOBFIARLIST, that.TYPE);
-                            //that.trigger(that.list.employmentNotice, that.TYPE.EMPLOYMENT_NOTICE_LIST, that.TYPE);
                         }
                     } else {
                         that.list.employmentNotice = undefined;
                         that.trigger(that.list.jobFair, that.TYPE.JOBFIARLIST, that.TYPE);
-                        //that.trigger(undefined, that.TYPE.EMPLOYMENT_NOTICE_LIST, that.TYPE);
                     }
                     
                 }
@@ -117,7 +121,7 @@ let SeoulApiStore = Reflux.createStore({
         } else {
             // 없는 경우 서버에서 데이터 요청
             console.log("[SeoulApiStore] onGetEmploymentNoticeList server data");
-            this.ajaxFactory(this.API.employmentNoticeUrl, "jsonp");
+            this.ajaxFactory(this.API.employmentNoticeUrl, "jsonp", callType);
         }
     }
 
