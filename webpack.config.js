@@ -29,6 +29,10 @@ var config = {
             {
                 test: /\.less$/,
                 loader: "style!css!less"
+            },
+            {
+                test: /\.png$/,
+                loader: "url-loader?limit=100000"
             }
         ]
     }
