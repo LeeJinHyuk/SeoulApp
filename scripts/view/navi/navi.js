@@ -52,7 +52,7 @@ class Navi extends React.Component {
                 <div className="navi">
                     <div className="title">
                         <span>
-                            {this.props.naviType === GD.NAVITYPE.JOBFAIR ? GD.TITLE.JOBFAIR : GD.TITLE.EMPLOYMENT_NOTICE}
+                            서울잡
                         </span>
                     </div>
                     <div className="tab">
