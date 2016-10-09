@@ -52,7 +52,7 @@ class Navi extends React.Component {
                 <div className="navi">
                     <div className="title">
                         <span>
-                            서울잡
+                            {GD.TITLE.APP}
                         </span>
                     </div>
                     <div className="tab">
