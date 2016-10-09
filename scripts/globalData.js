@@ -3,6 +3,7 @@
  */
 const GD = {
     TITLE : {
+        APP : "서울잡",
         JOBFAIR : "취업설명회",
         EMPLOYMENT_NOTICE : "채용공고"
     },
@@ -18,6 +19,10 @@ const GD = {
     JOBLISTMODE : {
         TOTAL : 0, // 취업설명회 리스트 전체
         CURRENT_YEAR : 1 // 취업설명회 이번 년도
+    },
+    EMPLOYMENTNOTICELISTMODE : {
+        NORMAL : 0, // 검색없이 일반 상태
+        SEARCH : 1 // 조건 선택으로 검색한 상태
     },
     APICALL_TYPE : {
         START : 0, // 시작 시 API CALL
