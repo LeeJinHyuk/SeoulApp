@@ -11,6 +11,7 @@ import GD from "../globalData";
 import Loading from "./loading/loading";
 import Navi from "./navi/navi";
 import JobFairList from "./list/jobFairList";
+import EmploymentNoticeList from "./list/employmentNoticeList";
 import SeoulApiStore from "../store/seoulApiStore";
 import SeoulApiAction from "../action/seoulApiAction";
 import style from "./container.less";
@@ -115,11 +116,14 @@ class Container extends React.Component {
         naviType = GD.NAVITYPE.DETAIL;
         break;
     }
+    // 탭 또는 데이터 갱신으로 인한 부분이기 때문에 스크롤 위치를 초기화한다.
+    window.document.body.scrollTop = 0;
 
     this.setState({
       isLoading : false,
       naviType : naviType,
-      listData : result
+      listData : result,
+      isMoveScroll : false
     });
   };
 
@@ -158,6 +162,15 @@ class Container extends React.Component {
                   <JobFairList
                       listData={this.state.listData}>
                   </JobFairList>
+                  :
+                  null
+          }
+          {
+              this.state.naviType === GD.NAVITYPE.EMPLOYMENT_NOTICE 
+                  ?
+                  <EmploymentNoticeList
+                    listData={this.state.listData}>
+                  </EmploymentNoticeList>
                   :
                   null
           }
