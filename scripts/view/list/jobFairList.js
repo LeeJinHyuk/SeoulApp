@@ -30,15 +30,15 @@ class JobFairList extends React.Component {
         this.selectCondition = this.selectCondition.bind(this);
     };
 
-    // componentWillMount() {
-    //     console.log("[JobFairList] componentWillMount");
-    //
-    // };
+    componentWillMount() {
+        console.log("[JobFairList] componentWillMount");
+    
+    };
 
-    // componentDidMount() {
-    //     console.log("[JobFairList] componentDidMount");
-    //
-    // };
+    componentDidMount() {
+        console.log("[JobFairList] componentDidMount");
+    
+    };
 
     componentWillReceiveProps(nextProps) {
         console.log("[JobFairList] componentWillReceiveProps");
