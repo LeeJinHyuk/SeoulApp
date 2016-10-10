@@ -5,6 +5,7 @@ import React from "react";
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 import GD from "../../globalData";
 import EmploymentNoticeItem from "./employmentNoticeItem";
+import EmploymentNoticePopup from "./popup/employmentNoticePopup";
 import style from "./EmploymentNoticeList.less";
 
 class EmploymentNoticeList extends React.Component {
@@ -23,6 +24,8 @@ class EmploymentNoticeList extends React.Component {
         this.makeItem = this.makeItem.bind(this);
         // 검색 조건 팝업 노출
         this.openConditionPopup = this.openConditionPopup.bind(this);
+        // 검색 선택 시 실행 콜백
+        this.selectCondition = this.selectCondition.bind(this);
         // 테스트 파싱 함수1
         this.testCall = this.testCall.bind(this);
         // 테스트 파싱 함수2
@@ -73,6 +76,31 @@ class EmploymentNoticeList extends React.Component {
         this.setState({
             isPrintSearchTab : true
         });
+    };
+
+    selectCondition(data) {
+
+    };
+
+    makeItem() {
+        let itemTag = [];
+
+        if (this.state.listData) {
+            for (let i = 0; i < this.state.maxPrintData; i++) {
+                itemTag.push(
+                    <EmploymentNoticeItem
+                        itemData={this.state.listData[i]}
+                        key={i}
+                        index={i}
+                    >
+                    </EmploymentNoticeItem>
+                );
+            }
+        } else {
+            itemTag = null;
+        }
+
+        return itemTag;
     };
 
     testCall(nextProps) {
@@ -144,27 +172,6 @@ class EmploymentNoticeList extends React.Component {
         }
     };
 
-    makeItem() {
-        let itemTag = [];
-
-        if (this.state.listData) {
-            for (let i = 0; i < this.state.maxPrintData; i++) {
-                itemTag.push(
-                    <EmploymentNoticeItem
-                        itemData={this.state.listData[i]}
-                        key={i}
-                        index={i}
-                    >
-                    </EmploymentNoticeItem>
-                );
-            }
-        } else {
-            itemTag = null;
-        }
-
-        return itemTag;
-    };
-
     render() {
         return (
             this.state.listData !== undefined
@@ -199,27 +206,10 @@ class EmploymentNoticeList extends React.Component {
                     {
                         this.state.isPrintSearchTab === true
                             ?
-                            <div
-                                className="conditionPopup">
-                                <div className="region">
-                                    <div className="selectRegion">
-                                        <span>지역</span>
-                                        <select id="soflow">
-                                            <option>지역선택</option>
-                                            <option>강남구</option>
-                                            <option>도봉구</option>
-                                        </select>
-                                        <span>최대 3개까지 선택가능</span>
-                                    </div>
-                                    <div className="selectedRegion">
-                                        <ul>
-                                            <li>test1</li>
-                                            <li>test2</li>
-                                            <li>test3</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
+                            <EmploymentNoticePopup
+                                listData={this.state.listData}
+                                searchCallback={this.selectCondition}>
+                            </EmploymentNoticePopup>
                             :
                             null
                     }
