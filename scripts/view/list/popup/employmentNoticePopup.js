@@ -25,7 +25,9 @@ class EmploymentNoticePopup extends React.Component {
         // 팝업 노출 상태에서 빈공간 선택시 실행될 콜백
         this.selectEmptySpace = this.selectEmptySpace.bind(this);
         // 지역 선택란 선택 시 실행될 콜백
-        this.openReginList = this.openReginList.bind(this);
+        this.openRegionList = this.openRegionList.bind(this);
+        // 검색 버튼 선택
+        this.searchData = this.searchData.bind(this);
     };
 
     // componentWillMount() {
@@ -101,21 +103,105 @@ class EmploymentNoticePopup extends React.Component {
     };
 
     selectRegionItem(e) {
+        let regionName;
+        let tmpSelectedList;
+        let isExist = false;
+
+        e.stopPropagation();
+
+        tmpSelectedList = this.state.selectedItem.slice();
+
+        for(let i = 0; i < GD.REGION.length; i++) {
+            if (e.target.className === GD.REGION[i].CODE) {
+                regionName = GD.REGION[i].NAME;
+                break;
+            }
+        }
+
+        for (let i = 0; i < tmpSelectedList.length; i++) {
+            if (regionName === tmpSelectedList[i]) {
+                isExist = true;
+                break;
+            }
+        }
+
+        if (isExist === true) {
+            // 중복
+            this.setState({
+                isActivateTab : false
+            });
+        } else {
+            // 신규 등록
+            tmpSelectedList.push(regionName);
+            if (tmpSelectedList.length === 3) {
+                this.setState({
+                    isActivateTab : false,
+                    selectedItem : tmpSelectedList,
+                    isMax : true
+                });
+            } else {
+                this.setState({
+                    isActivateTab : false,
+                    selectedItem : tmpSelectedList,
+                    isMax : false
+                });
+            }
+        }
 
     };
 
     deleteSelectedRegionItem(e) {
+        let tmpSelectedList;
 
+        e.stopPropagation();
+
+        tmpSelectedList = this.state.selectedItem.slice();
+        
+        for(let i = 0; i < tmpSelectedList.length; i++) {
+            if (tmpSelectedList[i] === e.target.textContent) {
+                tmpSelectedList.splice(i, 1);
+                break;
+            }
+        }
+
+        this.setState({
+            selectedItem : tmpSelectedList,
+            isMax : false
+        });
     };
 
     selectEmptySpace(e) {
-
+        this.props.searchCallback();
     };
 
-    openReginList(e) {
-        this.setState({
-            isActivateTab : true
+    openRegionList(e) {
+        e.stopPropagation();
+        if (this.state.isMax === false) {
+            this.setState({
+                isActivateTab : !this.state.isActivateTab
+            });
+        }
+    };
+
+    searchData(e) {
+        let filterData;
+        let that = this;
+
+        e.stopPropagation();
+
+        filterData = this.props.listData.filter(function(item, index, array) {
+            for(let i = 0; i < that.state.selectedItem.length; i++) {
+                if (item.WORK_PARAR_BASS_ADRES_CN.indexOf(that.state.selectedItem[i]) > -1) {
+                    return true;
+                }
+            }
+            return false;
         });
+
+        if (!filterData) {
+            filterData = [];
+        }
+        this.props.searchCallback(filterData);
     };
 
     render() {
@@ -127,15 +213,15 @@ class EmploymentNoticePopup extends React.Component {
                     <div className="selectRegion">
                         <span>지역</span>
                         <span
-                            className={"description" + this.state.isMax === true ? " isMax" : ""}
-                            onClick={this.openReginList}>
+                            className={"description" + (this.state.isMax === true ? " isMax" : "")}
+                            onClick={this.openRegionList}>
                             지역을 선택하세요.
                         </span>
+                        <span>3개까지 선택가능</span>
                         <ul
                             className={this.state.isActivateTab === true ? "activateTab" : "deactivateTab"}>
                             {this.makeRegionItem()}
                         </ul>
-                        <span>최대 3개까지 선택가능</span>
                     </div>
                     <div className="selectedRegion">
                         {
@@ -147,6 +233,11 @@ class EmploymentNoticePopup extends React.Component {
                                 :
                                 null
                         }
+                    </div>
+                    <div
+                        className="searchButton"
+                        onClick={this.searchData}>
+                        <span>검색</span>
                     </div>
                 </div>
             </div>

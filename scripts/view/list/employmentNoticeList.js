@@ -79,7 +79,23 @@ class EmploymentNoticeList extends React.Component {
     };
 
     selectCondition(data) {
-
+        if (data) {
+            // 데이터 존재하면 조건에 따라 리스트 노출
+            if (data.length === 0) {
+                data = undefined;
+            }
+            this.setState({
+                isPrintSearchTab : false,
+                listData : data,
+                listMode : GD.EMPLOYMENTNOTICELISTMODE.SEARCH,
+                maxPrintData : 20
+            });
+        } else {
+            // 데이터 없다면 빈공간 선택으로 팝업만 제거
+            this.setState({
+                isPrintSearchTab : false
+            });
+        }
     };
 
     makeItem() {

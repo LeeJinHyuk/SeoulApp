@@ -15,22 +15,41 @@
     z-index: 2;
     width: 100%;
     background: rgb(255,255,255);
-    .description {
-
-    }
-    .isMax {
-
-    }
     ul {
-      margin: 0px;
-      padding: 0px;
       list-style: none;
     }
-    .activateTab {
-      display: block;
+    .selectRegion {
+      margin-top: 5px;
+      span {
+        display: inline-block;
+        padding: 10px;
+      }
+      .description {
+        padding: 10px 0px;
+        width: 150px;
+        text-align: center;
+        border: 1px solid rgb(0,0,0);
+      }
+      .isMax {
+        background-color: rgba(0,0,0,0.1);
+      }
+      ul {
+        margin: 5px 0px 50px 0px;
+        padding: 0px;
+        width: 150px;
+        height: 200px;
+        overflow: scroll;
+        border: 1px solid rgb(0,0,0);
+      }
+      .activateTab {
+        display: block;
+      }
+      .deactivateTab {
+        display: none;
+      }
     }
-    .deactivateTab {
-      display: none;
+    .searchButton {
+
     }
   }
 }
