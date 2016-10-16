@@ -39,8 +39,8 @@ class Loading extends React.Component {
   //
   // };
 
-  // componentWillUnMount() {
-  //   console.log("[Loading] componentWillUnMount");
+  // componentWillUnmount() {
+  //   console.log("[Loading] componentWillUnmount");
   //
   // };
 

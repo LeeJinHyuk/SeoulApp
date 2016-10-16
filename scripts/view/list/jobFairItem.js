@@ -40,8 +40,8 @@ class JobFairItem extends React.Component {
 
     };
 
-    componentWillUnMount() {
-        console.log("[JobFairItem] componentWillUnMount");
+    componentWillUnmount() {
+        console.log("[JobFairItem] componentWillUnmount");
 
     };
 

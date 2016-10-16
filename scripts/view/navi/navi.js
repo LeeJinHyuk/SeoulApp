@@ -40,8 +40,8 @@ class Navi extends React.Component {
     //
     // };
     //
-    // componentWillUnMount() {
-    //     console.log("[Navi] componentWillUnMount");
+    // componentWillUnmount() {
+    //     console.log("[Navi] componentWillUnmount");
     //
     // };
     

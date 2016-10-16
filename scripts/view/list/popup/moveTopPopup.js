@@ -50,7 +50,7 @@ class MoveTopPopup extends React.Component {
     // };
 
     componentWillUnmount() {
-        console.log("[MoveTopPopup] componentWillUnMount");
+        console.log("[MoveTopPopup] componentWillUnmount");
         window.removeEventListener("scroll", this.displayUpButton);
     };
 

@@ -70,8 +70,8 @@ class Container extends React.Component {
   //
   // };
   //
-  // componentWillUnMount() {
-  //   console.log("[Container] componentWillUnMount");
+  // componentWillUnmount() {
+  //   console.log("[Container] componentWillUnmount");
   //
   // };
 

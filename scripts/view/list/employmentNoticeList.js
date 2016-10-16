@@ -67,8 +67,8 @@ class EmploymentNoticeList extends React.Component {
     //
     // };
 
-    // componentWillUnMount() {
-    //     console.log("[EmploymentNoticeList] componentWillUnMount");
+    // componentWillUnmount() {
+    //     console.log("[EmploymentNoticeList] componentWillUnmount");
     //
     // };
 

@@ -60,8 +60,8 @@ class EmploymentNoticePopup extends React.Component {
     //
     // };
     //
-    // componentWillUnMount() {
-    //     console.log("[EmploymentNoticePopup] componentWillUnMount");
+    // componentWillUnmount() {
+    //     console.log("[EmploymentNoticePopup] componentWillUnmount");
     //
     // };
     makeRegionItem() {

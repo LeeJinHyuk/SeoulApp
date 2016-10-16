@@ -61,8 +61,8 @@ class JobFairList extends React.Component {
     //
     // };
 
-    componentWillUnMount() {
-        console.log("[JobFairList] componentWillUnMount");
+    componentWillUnmount() {
+        console.log("[JobFairList] componentWillUnmount");
     
     };
 

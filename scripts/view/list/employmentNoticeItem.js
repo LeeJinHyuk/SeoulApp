@@ -40,8 +40,8 @@ class EmploymentNoticeItem extends React.Component {
 
     };
 
-    componentWillUnMount() {
-        console.log("[EmploymentNoticeItem] componentWillUnMount");
+    componentWillUnmount() {
+        console.log("[EmploymentNoticeItem] componentWillUnmount");
 
     };
 
