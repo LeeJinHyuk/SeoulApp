@@ -5,6 +5,7 @@ import React from "react";
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 import GD from "../../globalData";
 import JobFairItem from "./jobFairItem";
+import MoveTopPopup from "./popup/moveTopPopup";
 import style from "./jobFairList.less";
 
 class JobFairList extends React.Component {
@@ -60,10 +61,10 @@ class JobFairList extends React.Component {
     //
     // };
 
-    // componentWillUnMount() {
-    //     console.log("[JobFairList] componentWillUnMount");
-    //
-    // };
+    componentWillUnMount() {
+        console.log("[JobFairList] componentWillUnMount");
+    
+    };
 
     rearrangeListData(nextProps) {
         let currentYear;
@@ -224,6 +225,11 @@ class JobFairList extends React.Component {
                             </div>
                             :
                             null
+                    }
+                    {
+                        <MoveTopPopup>
+                            
+                        </MoveTopPopup>
                     }
                 </div>
                 :
