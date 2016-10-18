@@ -223,7 +223,7 @@ class EmploymentNoticeList extends React.Component {
                         this.state.isPrintSearchTab === true
                             ?
                             <EmploymentNoticePopup
-                                listData={this.state.listData}
+                                listData={this.props.listData}
                                 searchCallback={this.selectCondition}>
                             </EmploymentNoticePopup>
                             :
