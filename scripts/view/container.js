@@ -85,8 +85,11 @@ class Container extends React.Component {
       case typeList.EMPLOYMENT_NOTICE_LIST:
         naviType = GD.NAVITYPE.EMPLOYMENT_NOTICE;
         break;
-      case typeList.RECURITDETAIL:
-        naviType = GD.NAVITYPE.DETAIL;
+      case typeList.JOBFAIR_DETAIL:
+        naviType = GD.NAVITYPE.JOBFAIR_DETAIL;
+        break;
+      case typeList.EMPLOYMENT_NOTICE_DETAIL:
+        naviType = GD.NAVITYPE.EMPLOYMENT_NOTICE_DETAIL
         break;
     }
 

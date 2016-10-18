@@ -15,7 +15,9 @@ let SeoulApiStore = Reflux.createStore({
 
         this.TYPE = {
             JOBFIARLIST : "jobFiarList",
-            EMPLOYMENT_NOTICE_LIST : "employmentNoticeList"
+            EMPLOYMENT_NOTICE_LIST : "employmentNoticeList",
+            JOBFAIR_DETAIL : "jobfairDetail",
+            EMPLOYMENT_NOTICE_DETAIL : "employmentNoticeDetail"
         };
         this.API = {
             jobFairUrl :
