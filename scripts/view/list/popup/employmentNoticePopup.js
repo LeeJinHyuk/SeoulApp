@@ -202,9 +202,9 @@ class EmploymentNoticePopup extends React.Component {
             if (!filterData) {
                 filterData = [];
             }
-            this.props.searchCallback(filterData);
+            this.props.searchCallback(filterData, this.state.selectedItem);
         } else {
-            this.props.searchCallback(this.props.listData);
+            this.props.searchCallback(this.props.listData, []);
         }
     };
 

@@ -82,7 +82,7 @@ class EmploymentNoticeList extends React.Component {
         });
     };
 
-    selectCondition(data) {
+    selectCondition(data, selectedCondition) {
         
         // 검색 조건으로 검색 시 스크롤 위치 초기화 되도록 수정
         window.document.body.scrollTop = 0;
@@ -96,7 +96,8 @@ class EmploymentNoticeList extends React.Component {
                 isPrintSearchTab : false,
                 listData : data,
                 listMode : GD.EMPLOYMENTNOTICELISTMODE.SEARCH,
-                maxPrintData : 20
+                maxPrintData : 20,
+                selectedCondition : selectedCondition
             });
         } else {
             // 데이터 없다면 빈공간 선택으로 팝업만 제거
@@ -232,7 +233,9 @@ class EmploymentNoticeList extends React.Component {
                         this.state.listMode === GD.EMPLOYMENTNOTICELISTMODE.SEARCH
                             ?
                             <div className="bottomTab">
-                                <span>test입니다</span>
+                                <span>
+                                    {this.state.selectedCondition.length > 0 ? JSON.stringify(this.state.selectedCondition) : "모든지역"}
+                                </span>
                             </div>
                             :
                             null
