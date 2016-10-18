@@ -6,6 +6,7 @@ import PureRenderMixin from 'react-addons-pure-render-mixin';
 import GD from "../../globalData";
 import EmploymentNoticeItem from "./employmentNoticeItem";
 import EmploymentNoticePopup from "./popup/employmentNoticePopup";
+import MoveTopPopup from "./popup/moveTopPopup";
 import style from "./EmploymentNoticeList.less";
 
 class EmploymentNoticeList extends React.Component {
@@ -14,6 +15,7 @@ class EmploymentNoticeList extends React.Component {
         this.state = {
             listMode : GD.EMPLOYMENTNOTICELISTMODE.NORMAL,
             listData : undefined,
+            selectedCondition : [],
             maxPrintData : 20,
             isPrintSearchTab : false
         };
@@ -228,6 +230,11 @@ class EmploymentNoticeList extends React.Component {
                             </EmploymentNoticePopup>
                             :
                             null
+                    }
+                    {
+                        <MoveTopPopup>
+
+                        </MoveTopPopup>
                     }
                 </div>
                 :

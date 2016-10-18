@@ -188,20 +188,24 @@ class EmploymentNoticePopup extends React.Component {
         let that = this;
 
         e.stopPropagation();
-
-        filterData = this.props.listData.filter(function(item, index, array) {
-            for(let i = 0; i < that.state.selectedItem.length; i++) {
-                if (item.WORK_PARAR_BASS_ADRES_CN.indexOf(that.state.selectedItem[i]) > -1) {
-                    return true;
+        
+        if (this.state.selectedItem.length > 0) {
+            filterData = this.props.listData.filter(function(item, index, array) {
+                for(let i = 0; i < that.state.selectedItem.length; i++) {
+                    if (item.WORK_PARAR_BASS_ADRES_CN.indexOf(that.state.selectedItem[i]) > -1) {
+                        return true;
+                    }
                 }
-            }
-            return false;
-        });
+                return false;
+            });
 
-        if (!filterData) {
-            filterData = [];
+            if (!filterData) {
+                filterData = [];
+            }
+            this.props.searchCallback(filterData);
+        } else {
+            this.props.searchCallback(this.props.listData);
         }
-        this.props.searchCallback(filterData);
     };
 
     render() {
