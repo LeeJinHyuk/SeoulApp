@@ -28,6 +28,8 @@ class EmploymentNoticeList extends React.Component {
         this.openConditionPopup = this.openConditionPopup.bind(this);
         // 검색 선택 시 실행 콜백
         this.selectCondition = this.selectCondition.bind(this);
+        // 더보기 버튼 선택시 실행 콜백
+        this.loadAdditionalData = this.loadAdditionalData.bind(this);
         // 테스트 파싱 함수1
         this.testCall = this.testCall.bind(this);
         // 테스트 파싱 함수2
@@ -81,6 +83,10 @@ class EmploymentNoticeList extends React.Component {
     };
 
     selectCondition(data) {
+        
+        // 검색 조건으로 검색 시 스크롤 위치 초기화 되도록 수정
+        window.document.body.scrollTop = 0;
+        
         if (data) {
             // 데이터 존재하면 조건에 따라 리스트 노출
             if (data.length === 0) {
@@ -102,9 +108,12 @@ class EmploymentNoticeList extends React.Component {
 
     makeItem() {
         let itemTag = [];
+        let length = 0;
 
         if (this.state.listData) {
-            for (let i = 0; i < this.state.maxPrintData; i++) {
+            length =
+                this.state.maxPrintData > this.state.listData.length ? this.state.listData.length : this.state.maxPrintData;
+            for (let i = 0; i < length; i++) {
                 itemTag.push(
                     <EmploymentNoticeItem
                         itemData={this.state.listData[i]}
@@ -119,6 +128,14 @@ class EmploymentNoticeList extends React.Component {
         }
 
         return itemTag;
+    };
+
+    loadAdditionalData(e) {
+        if (this.state.maxPrintData < this.state.listData.length) {
+            this.setState({
+                maxPrintData : this.state.maxPrintData + 20
+            });
+        }
     };
 
     testCall(nextProps) {
@@ -235,6 +252,16 @@ class EmploymentNoticeList extends React.Component {
                         <MoveTopPopup>
 
                         </MoveTopPopup>
+                    }
+                    {
+                        <div
+                            className="loadAdditionalData"
+                            onClick={this.loadAdditionalData}>
+                            <span
+                                className={this.state.maxPrintData >= this.state.listData.length ? "deactivate" : "activate"}>
+                                더보기
+                            </span>
+                        </div>
                     }
                 </div>
                 :
