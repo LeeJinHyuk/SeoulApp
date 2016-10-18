@@ -3,10 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--<script type="text/javascript" src="scripts/lib/cordova.js"></script>-->
+    <!--<script type="text/javascript" src="scripts/lib/cordova_plugins.js"></script>-->
+    <!--<script type="text/javascript" src="scripts/lib/plugins/cordova-plugin-toaster/www/toaster.js"></script>-->
     <title>서울잡</title>
 </head>
 <body>
 <div id="root"></div>
+<script type="text/javascript">
+        if (navigator.userAgent.indexOf("Android") > -1) {
+            // 안드로이드 일 경우에만 진입
+            var cordovaLib = document.createElement("script");
+            var cordovaPluginLib = document.createElement("script");
+            var toastLib = document.createElement("script");
+            cordovaLib.type = "text/javascript";
+            cordovaLib.src = "scripts/lib/cordova.js";
+            cordovaPluginLib.type = "text/javascript";
+            cordovaPluginLib.src = "scripts/lib/cordova_plugins.js";
+            toastLib.type = "text/javascript";
+            toastLib.src = "scripts/lib/plugins/cordova-plugin-toaster/www/toaster.js";
+
+            // 모바일 기기에서 실행하는 경우에만 Cordova 라이브러리를 추가
+            document.head.appendChild(cordovaLib);
+            // 모바일 기기에서 실행하는 경우에만 Cordova Toast 라이브러리를 추가
+            document.head.appendChild(cordovaPluginLib);
+            document.head.appendChild(toastLib);
+        }
+</script>
 <script src="scripts/main.bundle.js" charset="utf-8"></script>
 </body>
 </html>
