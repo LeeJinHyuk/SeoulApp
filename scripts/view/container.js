@@ -78,6 +78,8 @@ class Container extends React.Component {
   handleApiData(result, type, typeList) {
     console.log("[Container] handleApiData");
     let naviType;
+    // 데이터 갱신 때 마다 스크롤 위치 초기화
+    window.document.body.scrollTop = 0;
     switch(type) {
       case typeList.JOBFIARLIST:
         naviType = GD.NAVITYPE.JOBFAIR;
