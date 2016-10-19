@@ -85,7 +85,7 @@ class MoveTopPopup extends React.Component {
                 <div
                     className="moveTop"
                     onClick={this.clickUpButton}>
-                    <span>맨위로</span>
+                    <span>TOP</span>
                 </div>
                 :
                 null
