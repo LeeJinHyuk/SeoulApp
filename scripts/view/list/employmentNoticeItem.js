@@ -48,17 +48,15 @@ class EmploymentNoticeItem extends React.Component {
     render() {
         return (
             <div className={"item index_" + this.props.index}>
-                <div>
-                    <span>{this.props.itemData.CMPNY_NM}</span>
+                <span className="companyName">{this.props.itemData.CMPNY_NM}</span>
+                <span className="companyJobCode">{this.props.itemData.JOBCODE_NM}</span>
+                <div className="companyAddress">
+                    <strong>근무예정지 </strong>
+                    <span>{this.props.itemData.WORK_PARAR_BASS_ADRES_CN}</span>
                 </div>
-                <div>
-                    <span>{this.props.itemData.JOBCODE_NM}</span>
-                </div>
-                <div>
-                    <span>{this.props.itemData.BASS_ADRES_CN}</span>
-                </div>
-                <div>
-                    <span>{this.props.itemData.HOPE_WAGE}</span>
+                <div className="closingDate">
+                    <strong>마감일 </strong>
+                    <span>{this.props.itemData.RCEPT_CLOS_NM}</span>
                 </div>
             </div>
         )
