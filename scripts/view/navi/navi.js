@@ -46,6 +46,15 @@ class Navi extends React.Component {
     // };
     
     render() {
+        let activeJabfair = "";
+        let activeEmployment = "";
+
+        if (this.props.naviType === GD.NAVITYPE.JOBFAIR) {
+            activeJabfair = "activateTitle";
+        } else {
+            activeEmployment = "activateTitle";
+        }
+        
         return (
             (this.props.naviType === GD.NAVITYPE.JOBFAIR || this.props.naviType === GD.NAVITYPE.EMPLOYMENT_NOTICE)
                 ?
@@ -56,10 +65,10 @@ class Navi extends React.Component {
                         </span>
                     </div>
                     <div className="tab">
-                        <span onClick={this.props.changeNaviType}>
+                        <span className={activeJabfair} onClick={this.props.changeNaviType}>
                             {GD.TITLE.JOBFAIR}
                         </span>
-                        <span onClick={this.props.changeNaviType}>
+                        <span className={activeEmployment} onClick={this.props.changeNaviType}>
                             {GD.TITLE.EMPLOYMENT_NOTICE}
                         </span>
                     </div>
