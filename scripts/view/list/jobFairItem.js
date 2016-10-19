@@ -48,20 +48,19 @@ class JobFairItem extends React.Component {
     render() {
         return (
             <div className={"item index_" + this.props.index}>
-                <div>
-                    <span>{this.props.itemData.JOBFAIR_YEAR}</span>
+                <div className="jabFairTitle">
+                    <span className="yearBadge">{this.props.itemData.JOBFAIR_YEAR}</span>
+                    <span className="jobFairJoint">{this.props.itemData.JOBFAIR_JOINT_AUSPICES}</span>
                 </div>
                 <div>
-                    <span>{this.props.itemData.JOBFAIR_NAME}</span>
+                    <span className="jobFairName">{this.props.itemData.JOBFAIR_NAME}</span>
                 </div>
-                <div>
+                <div className="jobFairDay">
+                    <strong>일자 </strong>
                     <span>{this.props.itemData.JOBFAIR_DATE} </span>
                     <span>{this.props.itemData.JOBFAIR_FRTIME}</span>
                     <span> ~ </span>
                     <span>{this.props.itemData.JOBFAIR_EDTIME}</span>
-                </div>
-                <div>
-                    <span>{this.props.itemData.JOBFAIR_JOINT_AUSPICES}</span>
                 </div>
             </div>
         )
