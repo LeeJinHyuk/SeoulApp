@@ -219,23 +219,27 @@ class EmploymentNoticePopup extends React.Component {
                             className={"description" + (this.state.isMax === true ? " isMax" : "")}
                             onClick={this.openRegionList}>
                             지역을 선택하세요.
+                            <span className="downArrowIcon"></span>
                         </span>
                         <ul
                             className={this.state.isActivateTab === true ? "activateTab" : "deactivateTab"}>
                             {this.makeRegionItem()}
                         </ul>
                     </div>
-                    <div className="selectedRegion">
-                        {
-                            this.state.selectedItem.length > 0
-                                ?
+
+                    {
+                        this.state.selectedItem.length > 0
+                            ?
+                            <div className="selectedRegion">
+                                <strong>선택된 지역 : </strong>
                                 <ul>
                                     {this.makeseletecItem()}
                                 </ul>
-                                :
-                                null
-                        }
-                    </div>
+                            </div>
+                            :
+                            null
+                    }
+
                     <div
                         className="searchButton"
                         onClick={this.searchData}>

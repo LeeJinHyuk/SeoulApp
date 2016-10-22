@@ -1,25 +1,36 @@
 .employmentNoticeList {
   margin-top: 50px;
   .topTab {
+    position: relative;
     margin-bottom: 10px;
     font-size: 14px;
-    color: rgba(0, 0, 0, 0.5);
     text-align: right;
+    color: rgba(0, 0, 0, 0.5);
     border-bottom: 1px solid #ccc;
     .totalSearchResult {
-      padding: 10px;
-      width: 260px;
       display: inline-block;
-      text-align: left;
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      font-size: 13px;
     }
     .conditionTab {
-      padding: 10px;
       display: inline-block;
+      padding: 10px 10px;
+      span {
+        padding: 3px 6px 4px;
+        font-size: 13px;
+        color: #fff;
+        border-radius: 3px;
+        background: #1978d1;
+      }
     }
   }
   .bottomTab {
-    padding: 10px;
-    border-bottom: 1px solid rgba(0,0,0,0.1);
+    padding: 0 10px 10px;
+    border-bottom: 1px solid #ccc;
+    font-size: 13px;
+    color: rgba(0, 0, 0, 0.5);
   }
   .loadAdditionalData {
     margin: 15px 20px;

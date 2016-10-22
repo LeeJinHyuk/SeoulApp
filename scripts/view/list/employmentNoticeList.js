@@ -218,7 +218,7 @@ class EmploymentNoticeList extends React.Component {
                             this.state.listMode === GD.EMPLOYMENTNOTICELISTMODE.SEARCH
                                 ?
                                 <div className="totalSearchResult">
-                                    <span>검색결과 : {this.state.listData.length} 개</span>
+                                    <span><strong>검색결과 : </strong>{this.state.listData.length} 개</span>
                                 </div>
                                 :
                                 null
@@ -234,6 +234,7 @@ class EmploymentNoticeList extends React.Component {
                             ?
                             <div className="bottomTab">
                                 <span>
+                                    <strong>검색지역 : </strong>
                                     {this.state.selectedCondition.length > 0 ? JSON.stringify(this.state.selectedCondition) : "모든지역"}
                                 </span>
                             </div>
