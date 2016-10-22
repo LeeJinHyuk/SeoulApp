@@ -37,7 +37,7 @@ let SeoulApiStore = Reflux.createStore({
                         that.list.jobFair = undefined;
                     }
                     // 취업 설명회 데이터 수신 완료 되더라도 채용 공고 수신이 완료되지 않기 때문에 trigger하지 않는다.
-                    //that.trigger(that.list.jobFair, that.TYPE.JOBFIARLIST, that.TYPE);
+                    //that.trigger(that.list.jobFair, that.TYPE.JOBFAIRLIST, that.TYPE);
                 } else if (url.indexOf("GetJobInfo") > -1) {
                     let tokenArray;
                     let newUrl;
@@ -66,7 +66,7 @@ let SeoulApiStore = Reflux.createStore({
                             if (callType === GD.APICALL_TYPE.START) {
                                 // 첫 스타트일 경우 첫 데이터 1000개만 가지고온 후 트리거 하여 로딩을 제거
                                 // 나머지는 비동기로 백그라운드에서 계속 요청하면서 갱신한다.
-                                that.trigger(that.list.jobFair, that.TYPE.JOBFIARLIST, that.TYPE);
+                                that.trigger(that.list.jobFair, GD.TYPE.JOBFAIRLIST, that.TYPE);
                             }
                             that.ajaxFactory(newUrl, "jsonp");
                         } else {
@@ -77,7 +77,7 @@ let SeoulApiStore = Reflux.createStore({
                         }
                     } else {
                         that.list.employmentNotice = undefined;
-                        that.trigger(that.list.jobFair, that.TYPE.JOBFIARLIST, that.TYPE);
+                        that.trigger(that.list.jobFair, GD.TYPE.JOBFAIRLIST, that.TYPE);
                     }
                     
                 }
@@ -93,7 +93,7 @@ let SeoulApiStore = Reflux.createStore({
         if (this.list.jobFair) {
             // 이미 받아온 데이터가 존재할 경우 로컬스토리지 데이터 사용
             console.log("[SeoulApiStore] onGetJobFairList local data");
-            this.trigger(this.list.jobFair, GD.TYPE.JOBFIARLIST, GD.TYPE);
+            this.trigger(this.list.jobFair, GD.TYPE.JOBFAIRLIST, GD.TYPE);
         } else {
             // 없는 경우 서버에서 데이터 요청
             console.log("[SeoulApiStore] onGetJobFairList server data");
