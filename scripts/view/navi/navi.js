@@ -59,6 +59,7 @@ class Navi extends React.Component {
             (this.props.naviType === GD.NAVITYPE.JOBFAIR || this.props.naviType === GD.NAVITYPE.EMPLOYMENT_NOTICE)
                 ?
                 <div className="navi">
+                    <div className="seoulJobIcon"></div>
                     <div className="title">
                         <span>
                             {GD.TITLE.APP}
