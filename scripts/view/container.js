@@ -12,18 +12,23 @@ import Loading from "./loading/loading";
 import Navi from "./navi/navi";
 import JobFairList from "./list/jobFairList";
 import EmploymentNoticeList from "./list/employmentNoticeList";
+import JobFairDetail from "./detail/jobFairDetail"
 import SeoulApiStore from "../store/seoulApiStore";
 import SeoulApiAction from "../action/seoulApiAction";
+import DetailDataStore from "../store/detailDataStore";
 import style from "./container.less";
 
 @ReactMixin.decorate(Reflux.listenTo(SeoulApiStore, "handleApiData"))
+@ReactMixin.decorate(Reflux.listenTo(DetailDataStore, "handleApiData"))
 class Container extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       isLoading : false,
       naviType : GD.NAVITYPE.JOBFAIR,
-      listData : undefined
+      listData : undefined,
+      detailType : undefined,
+      detailData : undefined
     };
     // shouldComponentUpdate 성능 향상 모듈 실행
     this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
@@ -95,11 +100,20 @@ class Container extends React.Component {
         break;
     }
 
-    this.setState({
-      isLoading : false,
-      naviType : naviType,
-      listData : result
-    });
+    if (naviType === GD.NAVITYPE.JOBFAIR_DETAIL ||
+        naviType === GD.NAVITYPE.EMPLOYMENT_NOTICE_DETAIL) {
+      // 상세 타입인 경우
+      this.setState({
+        detailType : naviType,
+        detailData : result
+      });
+    } else {
+      this.setState({
+        isLoading : false,
+        naviType : naviType,
+        listData : result
+      });
+    }
   };
 
   changeNaviType(e) {
@@ -127,6 +141,15 @@ class Container extends React.Component {
     return (
         <div id="container">
           <Loading isLoading={this.state.isLoading}/>
+          {
+              this.state.detailType === GD.NAVITYPE.JOBFAIR_DETAIL
+                  ?
+                  <JobFairDetail
+                    item={this.state.detailData}>
+                  </JobFairDetail>
+                  :
+                  null
+          }
           <Navi 
               naviType={this.state.naviType}
               changeNaviType={this.changeNaviType}>

@@ -26,7 +26,7 @@ class EmploymentNoticeItem extends React.Component {
     };
 
     // shouldComponentUpdate(nextProps, nextState) {
-    //     console.log("[JobFairItem] shouldComponentUpdate");
+    //     console.log("[EmploymentNoticeItem] shouldComponentUpdate");
     //
     // };
 

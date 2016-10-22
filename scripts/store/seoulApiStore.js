@@ -12,19 +12,7 @@ let SeoulApiStore = Reflux.createStore({
     init : function() {
         let tmpJobFairData = localStorage.getItem(GD.STORAGE_KEY.JOBFAIR);
         let tmpEmploymentNoticeData = localStorage.getItem(GD.STORAGE_KEY.EMPLOYMENT_NOTICE);
-
-        this.TYPE = {
-            JOBFIARLIST : "jobFiarList",
-            EMPLOYMENT_NOTICE_LIST : "employmentNoticeList",
-            JOBFAIR_DETAIL : "jobfairDetail",
-            EMPLOYMENT_NOTICE_DETAIL : "employmentNoticeDetail"
-        };
-        this.API = {
-            jobFairUrl :
-                "http://openapi.seoul.go.kr:8088/4150495f3231303670726f6f636f737330/json/JobFairInfo/1/999/",
-            employmentNoticeUrl :
-                "http://openapi.seoul.go.kr:8088/4150495f3231303670726f6f636f737330/json/GetJobInfo/1/1000/"
-        };
+        
         this.list = {
             jobFair : tmpJobFairData !== undefined ? JSON.parse(tmpJobFairData) : undefined, // 채용설명회 리스트 데이터
             employmentNotice : tmpEmploymentNoticeData !== undefined ? JSON.parse(tmpEmploymentNoticeData) : undefined // 채용공고 리스트 데이터
@@ -105,11 +93,11 @@ let SeoulApiStore = Reflux.createStore({
         if (this.list.jobFair) {
             // 이미 받아온 데이터가 존재할 경우 로컬스토리지 데이터 사용
             console.log("[SeoulApiStore] onGetJobFairList local data");
-            this.trigger(this.list.jobFair, this.TYPE.JOBFIARLIST, this.TYPE);
+            this.trigger(this.list.jobFair, GD.TYPE.JOBFIARLIST, GD.TYPE);
         } else {
             // 없는 경우 서버에서 데이터 요청
             console.log("[SeoulApiStore] onGetJobFairList server data");
-            this.ajaxFactory(this.API.jobFairUrl, "jsonp");
+            this.ajaxFactory(GD.API.jobFairUrl, "jsonp");
         }
     },
     onGetEmploymentNoticeList(callType) {
@@ -118,12 +106,12 @@ let SeoulApiStore = Reflux.createStore({
             // 이미 받아온 데이터가 존재할 경우 로컬스토리지 데이터 사용
             console.log("[SeoulApiStore] onGetEmploymentNoticeList local data");
             if (callType === GD.APICALL_TYPE.TAB) {
-                this.trigger(this.list.employmentNotice, this.TYPE.EMPLOYMENT_NOTICE_LIST, this.TYPE);
+                this.trigger(this.list.employmentNotice, GD.TYPE.EMPLOYMENT_NOTICE_LIST, GD.TYPE);
             }
         } else {
             // 없는 경우 서버에서 데이터 요청
             console.log("[SeoulApiStore] onGetEmploymentNoticeList server data");
-            this.ajaxFactory(this.API.employmentNoticeUrl, "jsonp", callType);
+            this.ajaxFactory(GD.API.employmentNoticeUrl, "jsonp", callType);
         }
     }
 

@@ -4,8 +4,22 @@
 const GD = {
     TITLE : {
         APP : "서울잡",
-        JOBFAIR : "취업설명회",
-        EMPLOYMENT_NOTICE : "채용공고"
+        JOBFAIR : "취업박람회",
+        EMPLOYMENT_NOTICE : "채용공고",
+        JOBFAIR_DETAIL : "취업박람회 상세보기",
+        EMPLOYMENT_DETAIL : "채용공고 상세보기"
+    },
+    TYPE : {
+        JOBFIARLIST : "jobFiarList",
+        EMPLOYMENT_NOTICE_LIST : "employmentNoticeList",
+        JOBFAIR_DETAIL : "jobfairDetail",
+        EMPLOYMENT_NOTICE_DETAIL : "employmentNoticeDetail"
+    },
+    API : {
+        jobFairUrl :
+            "http://openapi.seoul.go.kr:8088/4150495f3231303670726f6f636f737330/json/JobFairInfo/1/999/",
+        employmentNoticeUrl :
+            "http://openapi.seoul.go.kr:8088/4150495f3231303670726f6f636f737330/json/GetJobInfo/1/1000/"        
     },
     NAVITYPE : {
         JOBFAIR: 0, // 취업설명회 타입
