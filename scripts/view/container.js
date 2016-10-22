@@ -86,7 +86,7 @@ class Container extends React.Component {
     // 데이터 갱신 때 마다 스크롤 위치 초기화
     window.document.body.scrollTop = 0;
     switch(type) {
-      case typeList.JOBFIARLIST:
+      case typeList.JOBFAIRLIST:
         naviType = GD.NAVITYPE.JOBFAIR;
         break;
       case typeList.EMPLOYMENT_NOTICE_LIST:
