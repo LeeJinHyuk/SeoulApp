@@ -50,7 +50,7 @@ class JobFairDetail extends React.Component {
         return (
             <div className="jobFairDetail">
                 <div className="detailNavi">
-                    <div className="backButton">Back</div>
+                    <div className="backButton">&lt;</div>
                     <span>{GD.TITLE.JOBFAIR_DETAIL}</span>
                 </div>
                 <div className="detailList">

@@ -3,7 +3,7 @@
  */
 const GD = {
     TITLE : {
-        APP : "서울잡",
+        APP : "서울 Job",
         JOBFAIR : "취업박람회",
         EMPLOYMENT_NOTICE : "채용공고",
         JOBFAIR_DETAIL : "취업박람회 상세보기",
