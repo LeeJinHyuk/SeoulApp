@@ -2,12 +2,16 @@
  * Created by eerto_000 on 2016-09-22.
  */
 import React from "react";
+import GD from "../../globalData";
+import DetailDataAction from "../../action/detailDataAction";
 import style from "./jobFairItem.less";
     
 class JobFairItem extends React.Component {
     constructor(props) {
         super(props);
 
+        // 아이템 선택 시 이벤트
+        this.selectItem = this.selectItem.bind(this);
     };
 
     componentWillMount() {
@@ -44,10 +48,17 @@ class JobFairItem extends React.Component {
         console.log("[JobFairItem] componentWillUnmount");
 
     };
-
+    
+    selectItem(e) {
+        console.log("[JobFairItem] selectItem");
+        DetailDataAction.showDetailPage(GD.TYPE.JOBFAIR_DETAIL, this.props.itemData);
+    };
+    
     render() {
         return (
-            <div className={"item index_" + this.props.index}>
+            <div 
+                className={"item index_" + this.props.index}
+                onClick={this.selectItem}>
                 <div className="jabFairTitle">
                     <span className="yearBadge">{this.props.itemData.JOBFAIR_YEAR}</span>
                     <span className="jobFairJoint">{this.props.itemData.JOBFAIR_JOINT_AUSPICES}</span>
