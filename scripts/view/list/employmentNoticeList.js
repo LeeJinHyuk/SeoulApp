@@ -83,11 +83,9 @@ class EmploymentNoticeList extends React.Component {
     };
 
     selectCondition(data, selectedCondition) {
-        
-        // 검색 조건으로 검색 시 스크롤 위치 초기화 되도록 수정
-        window.document.body.scrollTop = 0;
-        
         if (data) {
+            // 검색 조건으로 검색 시 스크롤 위치 초기화 되도록 수정
+            window.document.body.scrollTop = 0;
             // 데이터 존재하면 조건에 따라 리스트 노출
             if (data.length === 0) {
                 data = undefined;
