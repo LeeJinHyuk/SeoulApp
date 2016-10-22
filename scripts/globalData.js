@@ -10,7 +10,7 @@ const GD = {
         EMPLOYMENT_DETAIL : "채용공고 상세보기"
     },
     TYPE : {
-        JOBFIARLIST : "jobFiarList",
+        JOBFAIRLIST : "jobFiarList",
         EMPLOYMENT_NOTICE_LIST : "employmentNoticeList",
         JOBFAIR_DETAIL : "jobfairDetail",
         EMPLOYMENT_NOTICE_DETAIL : "employmentNoticeDetail"
