@@ -92,6 +92,7 @@ class EmploymentNoticePopup extends React.Component {
                         onClick={that.deleteSelectedRegionItem}
                         key={i}>
                         {item}
+                        <span className="deleteIcon"></span>
                     </li>
                 );
             });
