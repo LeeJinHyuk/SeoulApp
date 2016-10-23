@@ -3,6 +3,7 @@
  */
 import React from "react";
 import GD from "../../globalData";
+import DetailDataAction from "../../action/detailDataAction";
 import style from "./JobFairDetail.less";
 
 class JobFairDetail extends React.Component {
@@ -49,6 +50,7 @@ class JobFairDetail extends React.Component {
     };
 
     insertLocationUrl() {
+        console.log("[JobFairDetail] insertLocationUrl");
         let innerHtmlData = {
             __html : this.props.item.JOBFAIR_URL
         };
@@ -74,11 +76,19 @@ class JobFairDetail extends React.Component {
         }
     };
 
+    backButton() {
+        console.log("[JobFairDetail] backButton");
+        DetailDataAction.hideDetailPage();
+    };
+
     render() {
         return (
             <div className="jobFairDetail">
                 <div className="detailNavi">
-                    <div className="backButton">&lt;</div>
+                    <div
+                        className="backButton"
+                        onClick={this.backButton}>&lt;
+                    </div>
                     <span>{GD.TITLE.JOBFAIR_DETAIL}</span>
                 </div>
                 <div className="detailList">

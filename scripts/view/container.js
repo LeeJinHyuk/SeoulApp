@@ -83,8 +83,7 @@ class Container extends React.Component {
   handleApiData(result, type, typeList) {
     console.log("[Container] handleApiData");
     let naviType;
-    // 데이터 갱신 때 마다 스크롤 위치 초기화
-    window.document.body.scrollTop = 0;
+
     switch(type) {
       case typeList.JOBFAIRLIST:
         naviType = GD.NAVITYPE.JOBFAIR;
@@ -101,13 +100,16 @@ class Container extends React.Component {
     }
 
     if (naviType === GD.NAVITYPE.JOBFAIR_DETAIL ||
-        naviType === GD.NAVITYPE.EMPLOYMENT_NOTICE_DETAIL) {
+        naviType === GD.NAVITYPE.EMPLOYMENT_NOTICE_DETAIL ||
+        naviType === undefined) {
       // 상세 타입인 경우
       this.setState({
         detailType : naviType,
         detailData : result
       });
     } else {
+      // 데이터 갱신 때 마다 스크롤 위치 초기화
+      window.document.body.scrollTop = 0;
       this.setState({
         isLoading : false,
         naviType : naviType,
