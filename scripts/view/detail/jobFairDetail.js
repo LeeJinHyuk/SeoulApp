@@ -8,7 +8,9 @@ import style from "./JobFairDetail.less";
 class JobFairDetail extends React.Component {
     constructor(props) {
         super(props);
-        
+
+        // 장소 데이터가 html tag 인지 string인지 체크하여 추가
+        this.insertLocationUrl = this.insertLocationUrl.bind(this);
     };
 
     componentWillMount() {
@@ -46,6 +48,32 @@ class JobFairDetail extends React.Component {
 
     };
 
+    insertLocationUrl() {
+        let innerHtmlData = {
+            __html : this.props.item.JOBFAIR_URL
+        };
+
+        if (!this.props.item.JOBFAIR_URL) {
+            // 데이터 없는 경우
+            return null;
+        } else if (this.props.item.JOBFAIR_URL.indexOf("<table") > -1) {
+            // 태그인 경우
+            return (
+                <dd
+                    dangerouslySetInnerHTML={innerHtmlData}>
+
+                </dd>
+            );
+        } else {
+            // 경로인 경우
+            return (
+                <dd>
+                    <a href={this.props.item.JOBFAIR_URL}>경로</a>
+                </dd>
+            );
+        }
+    };
+
     render() {
         return (
             <div className="jobFairDetail">
@@ -67,7 +95,7 @@ class JobFairDetail extends React.Component {
                     <dl>
                         <dt>장소</dt>
                         <dd>{this.props.item.JOBFAIR_LOCATION}</dd>
-                        <dd>{this.props.item.JOBFAIR_URL}</dd>
+                        {this.insertLocationUrl()}
                     </dl>
                     <dl>
                         <dt>공동 주최기관</dt>
