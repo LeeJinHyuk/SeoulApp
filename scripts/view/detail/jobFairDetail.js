@@ -63,14 +63,6 @@ class JobFairDetail extends React.Component {
                             <span> ~ </span>
                             <span>{this.props.item.JOBFAIR_EDTIME}</span>
                         </dd>
-                        <dd>
-                            <strong>자치구 </strong>
-                            <span></span>
-                        </dd>
-                    </dl>
-                    <dl>
-                        <dt>행사내용</dt>
-                        <dd>{this.props.item.GUIDE_INTRO}</dd>
                     </dl>
                     <dl>
                         <dt>장소</dt>

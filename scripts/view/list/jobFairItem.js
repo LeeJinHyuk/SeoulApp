@@ -61,7 +61,6 @@ class JobFairItem extends React.Component {
                 onClick={this.selectItem}>
                 <div className="jabFairTitle">
                     <span className="yearBadge">{this.props.itemData.JOBFAIR_YEAR}</span>
-                    <span className="jobFairJoint">{this.props.itemData.JOBFAIR_JOINT_AUSPICES}</span>
                 </div>
                 <div>
                     <span className="jobFairName">{this.props.itemData.JOBFAIR_NAME}</span>
