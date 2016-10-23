@@ -55,10 +55,18 @@ class JobFairDetail extends React.Component {
                 </div>
                 <div className="detailList">
                     <dl>
-                        <dt>{this.props.item.JOBFAIR_NAME}</dt>
-                        <dd>{this.props.item.JOBFAIR_DATE}</dd>
-                        <dd>{this.props.item.JOBFAIR_FRTIME}</dd>
-                        <dd>{this.props.item.JOBFAIR_EDTIME}</dd>
+                        <dt className="jabFairTitle">{this.props.item.JOBFAIR_NAME}</dt>
+                        <dd>
+                            <strong>일자 </strong>
+                            <span>{this.props.item.JOBFAIR_DATE} </span>
+                            <span>{this.props.item.JOBFAIR_FRTIME}</span>
+                            <span> ~ </span>
+                            <span>{this.props.item.JOBFAIR_EDTIME}</span>
+                        </dd>
+                        <dd>
+                            <strong>자치구 </strong>
+                            <span></span>
+                        </dd>
                     </dl>
                     <dl>
                         <dt>행사내용</dt>
