@@ -70,7 +70,7 @@ class JobFairDetail extends React.Component {
             // 경로인 경우
             return (
                 <dd>
-                    <a href={this.props.item.JOBFAIR_URL}>경로</a>
+                    <a href={this.props.item.JOBFAIR_URL} className="moveMap">지도 바로보기 &gt;</a>
                 </dd>
             );
         }
