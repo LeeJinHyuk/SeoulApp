@@ -14,8 +14,11 @@ let DetailDataStore = Reflux.createStore({
     onShowDetailPage(type, item) {
         console.log("[DetailDataStore] onShowDetailPage");
         this.trigger(item, type, GD.TYPE);
+    },
+    onHideDetailPage() {
+        console.log("[DetailDataStore] onShowDetailPage");
+        this.trigger(undefined, undefined, GD.TYPE);
     }
-
 });
 
 export default DetailDataStore;

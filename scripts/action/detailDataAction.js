@@ -4,7 +4,8 @@
 import Reflux from 'reflux';
 
 let DetailDataAction = Reflux.createActions([
-    "showDetailPage"
+    "showDetailPage",
+    "hideDetailPage"
 ]);
 
 export default DetailDataAction;
