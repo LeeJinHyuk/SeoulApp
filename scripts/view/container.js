@@ -15,20 +15,16 @@ import EmploymentNoticeList from "./list/employmentNoticeList";
 import DetailView from "./detail/DetailView"
 import SeoulApiStore from "../store/seoulApiStore";
 import SeoulApiAction from "../action/seoulApiAction";
-import DetailDataStore from "../store/detailDataStore";
 import style from "./container.less";
 
 @ReactMixin.decorate(Reflux.listenTo(SeoulApiStore, "handleApiData"))
-@ReactMixin.decorate(Reflux.listenTo(DetailDataStore, "handleApiData"))
 class Container extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       isLoading : false,
       naviType : GD.NAVITYPE.JOBFAIR,
-      listData : undefined,
-      detailType : undefined,
-      detailData : undefined
+      listData : undefined
     };
     // shouldComponentUpdate 성능 향상 모듈 실행
     this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
@@ -98,24 +94,14 @@ class Container extends React.Component {
         naviType = GD.NAVITYPE.EMPLOYMENT_NOTICE_DETAIL
         break;
     }
-
-    if (naviType === GD.NAVITYPE.JOBFAIR_DETAIL ||
-        naviType === GD.NAVITYPE.EMPLOYMENT_NOTICE_DETAIL ||
-        naviType === undefined) {
-      // 상세 타입인 경우
-      this.setState({
-        detailType : naviType,
-        detailData : result
-      });
-    } else {
-      // 데이터 갱신 때 마다 스크롤 위치 초기화
-      window.document.body.scrollTop = 0;
-      this.setState({
-        isLoading : false,
-        naviType : naviType,
-        listData : result
-      });
-    }
+    
+    // 데이터 갱신 때 마다 스크롤 위치 초기화
+    window.document.body.scrollTop = 0;
+    this.setState({
+      isLoading : false,
+      naviType : naviType,
+      listData : result
+    });
   };
 
   changeNaviType(e) {
@@ -143,17 +129,6 @@ class Container extends React.Component {
     return (
         <div id="container">
           <Loading isLoading={this.state.isLoading}/>
-          {
-            (this.state.detailType === GD.NAVITYPE.JOBFAIR_DETAIL ||
-            this.state.detailType === GD.NAVITYPE.EMPLOYMENT_NOTICE_DETAIL)
-                  ?
-                  <DetailView
-                    item={this.state.detailData}
-                    type={this.state.detailType}>
-                  </DetailView>
-                  :
-                  null
-          }
           <Navi 
               naviType={this.state.naviType}
               changeNaviType={this.changeNaviType}>

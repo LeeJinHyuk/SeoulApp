@@ -2,23 +2,32 @@
  * Created by eerto_000 on 2016-08-03.
  */
 import React from "react";
+import ReactMixin from "react-mixin";
+import Reflux from "reflux";
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 import GD from "../../globalData";
 import JobFairItem from "./jobFairItem";
 import MoveTopPopup from "./popup/moveTopPopup";
+import DetailView from "../detail/DetailView"
+import DetailDataStore from "../../store/detailDataStore";
 import style from "./jobFairList.less";
 
+@ReactMixin.decorate(Reflux.listenTo(DetailDataStore, "handleDetailData"))
 class JobFairList extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             listMode : GD.JOBLISTMODE.TOTAL,
             listData : undefined,
-            conditionMode : false
+            conditionMode : false,
+            detailType : undefined,
+            detailData : undefined
         };
 
         // shouldComponentUpdate 성능 향상 모듈 실행
         this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
+        // 상세화면 진입
+        this.handleDetailData = this.handleDetailData.bind(this);
         // 전달 받은 리스트 데이터를 모드에 맞게 변경
         this.rearrangeListData = this.rearrangeListData.bind(this);
         // 리스트 아이템 생성
@@ -61,6 +70,25 @@ class JobFairList extends React.Component {
 
     componentWillUnmount() {
         console.log("[JobFairList] componentWillUnmount");
+    };
+
+    handleDetailData(result, type, typeList) {
+        console.log("[JobFairList] handleDetailData");
+        let naviType;
+
+        switch(type) {
+            case typeList.JOBFAIR_DETAIL:
+                naviType = GD.NAVITYPE.JOBFAIR_DETAIL;
+                break;
+            case typeList.EMPLOYMENT_NOTICE_DETAIL:
+                naviType = GD.NAVITYPE.EMPLOYMENT_NOTICE_DETAIL
+                break;
+        }
+
+        this.setState({
+            detailType : naviType,
+            detailData : result
+        });
     };
 
     rearrangeListData(nextProps) {
@@ -191,6 +219,17 @@ class JobFairList extends React.Component {
             this.state.listData !== undefined
                 ?
                 <div className="jobFairList">
+                    {
+                        (this.state.detailType === GD.NAVITYPE.JOBFAIR_DETAIL ||
+                        this.state.detailType === GD.NAVITYPE.EMPLOYMENT_NOTICE_DETAIL)
+                            ?
+                            <DetailView
+                                item={this.state.detailData}
+                                type={this.state.detailType}>
+                            </DetailView>
+                            :
+                            null
+                    }
                     <div className="conditionTab" onClick={this.openConditionPopup}>
                         {
                             this.state.listMode === GD.JOBLISTMODE.TOTAL

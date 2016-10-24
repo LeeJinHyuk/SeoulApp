@@ -2,13 +2,18 @@
  * Created by eerto_000 on 2016-10-09.
  */
 import React from "react";
+import ReactMixin from "react-mixin";
+import Reflux from "reflux";
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 import GD from "../../globalData";
 import EmploymentNoticeItem from "./employmentNoticeItem";
 import EmploymentNoticePopup from "./popup/employmentNoticePopup";
+import DetailView from "../detail/DetailView"
 import MoveTopPopup from "./popup/moveTopPopup";
+import DetailDataStore from "../../store/detailDataStore";
 import style from "./EmploymentNoticeList.less";
 
+@ReactMixin.decorate(Reflux.listenTo(DetailDataStore, "handleDetailData"))
 class EmploymentNoticeList extends React.Component {
     constructor(props) {
         super(props);
@@ -22,6 +27,8 @@ class EmploymentNoticeList extends React.Component {
 
         // shouldComponentUpdate 성능 향상 모듈 실행
         this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
+        // 상세화면 진입
+        this.handleDetailData = this.handleDetailData.bind(this);
         // 리스트 아이템 생성
         this.makeItem = this.makeItem.bind(this);
         // 검색 조건 팝업 노출
@@ -75,6 +82,25 @@ class EmploymentNoticeList extends React.Component {
     //     console.log("[EmploymentNoticeList] componentWillUnmount");
     //
     // };
+
+    handleDetailData(result, type, typeList) {
+        console.log("[EmploymentNoticeList] handleDetailData");
+        let naviType;
+
+        switch(type) {
+            case typeList.JOBFAIR_DETAIL:
+                naviType = GD.NAVITYPE.JOBFAIR_DETAIL;
+                break;
+            case typeList.EMPLOYMENT_NOTICE_DETAIL:
+                naviType = GD.NAVITYPE.EMPLOYMENT_NOTICE_DETAIL
+                break;
+        }
+
+        this.setState({
+            detailType : naviType,
+            detailData : result
+        });
+    };
 
     openConditionPopup(e) {
         this.setState({
@@ -211,6 +237,17 @@ class EmploymentNoticeList extends React.Component {
             this.state.listData !== undefined
                 ?
                 <div className="employmentNoticeList">
+                    {
+                        (this.state.detailType === GD.NAVITYPE.JOBFAIR_DETAIL ||
+                        this.state.detailType === GD.NAVITYPE.EMPLOYMENT_NOTICE_DETAIL)
+                            ?
+                            <DetailView
+                                item={this.state.detailData}
+                                type={this.state.detailType}>
+                            </DetailView>
+                            :
+                            null
+                    }
                     <div className="topTab">
                         {
                             this.state.listMode === GD.EMPLOYMENTNOTICELISTMODE.SEARCH
