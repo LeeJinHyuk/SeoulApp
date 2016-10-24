@@ -30,10 +30,11 @@ class EmploymentNoticePopup extends React.Component {
         this.searchData = this.searchData.bind(this);
     };
 
-    // componentWillMount() {
-    //     console.log("[EmploymentNoticePopup] componentWillMount");
-    //
-    // };
+    componentWillMount() {
+        console.log("[EmploymentNoticePopup] componentWillMount");
+        // 하위 컴포넌트 스크롤 방지
+        document.getElementsByTagName("html")[0].setAttribute("class", "preventScroll");
+    };
 
     // componentDidMount() {
     //     console.log("[EmploymentNoticePopup] componentDidMount");
@@ -59,11 +60,12 @@ class EmploymentNoticePopup extends React.Component {
     //     console.log("[EmploymentNoticePopup] componentDidUpdate");
     //
     // };
-    //
-    // componentWillUnmount() {
-    //     console.log("[EmploymentNoticePopup] componentWillUnmount");
-    //
-    // };
+
+    componentWillUnmount() {
+        console.log("[EmploymentNoticePopup] componentWillUnmount");
+        // 하위 컴포넌트 스크롤 방지 해제
+        document.getElementsByTagName("html")[0].removeAttribute("class");
+    };
     makeRegionItem() {
         let itemTag = [];
         let that = this;

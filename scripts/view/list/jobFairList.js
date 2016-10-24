@@ -33,12 +33,11 @@ class JobFairList extends React.Component {
 
     componentWillMount() {
         console.log("[JobFairList] componentWillMount");
-    
+
     };
 
     componentDidMount() {
         console.log("[JobFairList] componentDidMount");
-    
     };
 
     componentWillReceiveProps(nextProps) {
@@ -51,10 +50,16 @@ class JobFairList extends React.Component {
     //
     // };
 
-    // componentWillUpdate(nextProps, nextState) {
-    //     console.log("[JobFairList] componentWillUpdate");
-    //
-    // };
+    componentWillUpdate(nextProps, nextState) {
+        console.log("[JobFairList] componentWillUpdate");
+        if (nextState.conditionMode === true) {
+            // 검색조건 팝업 노출 상태일 때 스크롤 이벤트 제어
+            document.getElementsByTagName("html")[0].setAttribute("class", "preventScroll");
+        } else {
+            // 검색조건 팝업 미노출 상태일 때 스크롤 이벤트 제어 해제
+            document.getElementsByTagName("html")[0].removeAttribute("class", "preventScroll");
+        }
+    };
 
     // componentDidUpdate(prevProps, prevState) {
     //     console.log("[JobFairList] componentDidUpdate");
@@ -63,7 +68,6 @@ class JobFairList extends React.Component {
 
     componentWillUnmount() {
         console.log("[JobFairList] componentWillUnmount");
-    
     };
 
     rearrangeListData(nextProps) {
