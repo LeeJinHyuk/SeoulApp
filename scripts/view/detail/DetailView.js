@@ -170,12 +170,12 @@ class JobFairDetail extends React.Component {
                                 <dd><strong>기업이름 </strong>{this.props.item.CMPNY_NM}</dd>
                                 <dd>
                                     <strong className="styleAbsolute">사업요약내용 </strong>
-                                    <span className="businessContent">{this.props.item.BSNS_SUMRY_CN}</span></dd>
+                                    <span className="businessContent">{!this.props.item.BSNS_SUMRY_CN ? "-" : this.props.item.BSNS_SUMRY_CN}</span></dd>
                                 <dd>
                                     <strong className="styleAbsolute">기업주소 </strong>
                                     <span className="companyAddress">{this.props.item.BASS_ADRES_CN}</span>
                                 </dd>
-                                <dd><strong>인근전철역 </strong>{this.props.item.SUBWAY_NM}</dd>
+                                <dd><strong>인근전철역 </strong>{!this.props.item.SUBWAY_NM ? "-" : this.props.item.SUBWAY_NM}</dd>
                             </dl>
                         </div>
                 }
