@@ -256,14 +256,15 @@ class EmploymentNoticeList extends React.Component {
                         </MoveTopPopup>
                     }
                     {
-                        <div
-                            className="loadAdditionalData"
-                            onClick={this.loadAdditionalData}>
-                            <span
-                                className={this.state.maxPrintData >= this.state.listData.length ? "deactivate" : "activate"}>
-                                더보기
-                            </span>
-                        </div>
+                        this.state.maxPrintData < this.state.listData.length
+                            ?
+                            <div
+                                className="loadAdditionalData"
+                                onClick={this.loadAdditionalData}>
+                                <span>더보기</span>
+                            </div>
+                            :
+                            null
                     }
                 </div>
                 :
