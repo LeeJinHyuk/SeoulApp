@@ -159,7 +159,7 @@ class EmploymentNoticePopup extends React.Component {
         tmpSelectedList = this.state.selectedItem.slice();
         
         for(let i = 0; i < tmpSelectedList.length; i++) {
-            if (tmpSelectedList[i] === e.target.textContent) {
+            if (tmpSelectedList[i] === (e.target.textContent === "" ? e.target.parentNode.textContent : e.target.textContent)) {
                 tmpSelectedList.splice(i, 1);
                 break;
             }
