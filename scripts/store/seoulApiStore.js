@@ -66,7 +66,7 @@ let SeoulApiStore = Reflux.createStore({
                             if (callType === GD.APICALL_TYPE.START) {
                                 // 첫 스타트일 경우 첫 데이터 1000개만 가지고온 후 트리거 하여 로딩을 제거
                                 // 나머지는 비동기로 백그라운드에서 계속 요청하면서 갱신한다.
-                                that.trigger(that.list.jobFair, GD.TYPE.JOBFAIRLIST, that.TYPE);
+                                that.trigger(that.list.jobFair, GD.TYPE.JOBFAIRLIST, GD.TYPE);
                             }
                             that.ajaxFactory(newUrl, "jsonp");
                         } else {
@@ -77,7 +77,7 @@ let SeoulApiStore = Reflux.createStore({
                         }
                     } else {
                         that.list.employmentNotice = undefined;
-                        that.trigger(that.list.jobFair, GD.TYPE.JOBFAIRLIST, that.TYPE);
+                        that.trigger(that.list.jobFair, GD.TYPE.JOBFAIRLIST, GD.TYPE);
                     }
                     
                 }
