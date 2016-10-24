@@ -124,7 +124,7 @@ class JobFairDetail extends React.Component {
                             <dl>
                                 <dt>모집정보</dt>
                                 <dd><strong>모집직종 </strong>{this.props.item.JOBCODE_NM}</dd>
-                                <dd><strong>모집인원 </strong>{this.props.item.RCRIT_NMPR_CO}</dd>
+                                <dd><strong>모집인원 </strong>{this.props.item.RCRIT_NMPR_CO}명</dd>
                                 <dd>
                                     <strong>직무내용</strong>
                                     <div className="jobContent">{this.props.item.DTY_CN}</div></dd>
@@ -137,11 +137,17 @@ class JobFairDetail extends React.Component {
                                 <dd><strong>급여조건 </strong>{this.props.item.HOPE_WAGE}</dd>
                                 <dd><strong>근무시간 </strong>{this.props.item.WORK_TIME_NM}</dd>
                                 <dd><strong>근무형태 </strong>{this.props.item.WORK_TM_NM}</dd>
-                                <dd><strong>근무예정지 </strong>{this.props.item.WORK_PARAR_BASS_ADRES_CN}</dd>
+                                <dd>
+                                    <strong className="styleAbsolute">근무예정지 </strong>
+                                    <span className="jobAddress">{this.props.item.WORK_PARAR_BASS_ADRES_CN}</span>
+                                </dd>
                             </dl>
                             <dl>
                                 <dt>복리후생</dt>
-                                <dd><strong>4대보험 </strong>{this.props.item.JO_FEINSR_SBSCRB_NM}</dd>
+                                <dd>
+                                    <strong className="styleAbsolute">4대보험 </strong>
+                                    <span className="insuranceContent">{this.props.item.JO_FEINSR_SBSCRB_NM}</span>
+                                </dd>
                                 <dd><strong>퇴직금 </strong>{this.props.item.RET_GRANTS_NM}</dd>
                                 <dd><strong>공휴일 </strong>{this.props.item.HOLIDAY_NM}</dd>
                             </dl>
@@ -162,8 +168,13 @@ class JobFairDetail extends React.Component {
                             <dl>
                                 <dt>기업정보</dt>
                                 <dd><strong>기업이름 </strong>{this.props.item.CMPNY_NM}</dd>
-                                <dd><strong>사업요약내용 </strong>{this.props.item.BSNS_SUMRY_CN}</dd>
-                                <dd><strong>기업주소 </strong>{this.props.item.BASS_ADRES_CN}</dd>
+                                <dd>
+                                    <strong className="styleAbsolute">사업요약내용 </strong>
+                                    <span className="businessContent">{this.props.item.BSNS_SUMRY_CN}</span></dd>
+                                <dd>
+                                    <strong className="styleAbsolute">기업주소 </strong>
+                                    <span className="companyAddress">{this.props.item.BASS_ADRES_CN}</span>
+                                </dd>
                                 <dd><strong>인근전철역 </strong>{this.props.item.SUBWAY_NM}</dd>
                             </dl>
                         </div>
