@@ -119,72 +119,52 @@ class JobFairDetail extends React.Component {
                         <div className="detailList">
                             <dl>
                                 <dt className="DetailViewTitle">{this.props.item.CMPNY_NM}</dt>
-                                <dd>
-                                    <span>{this.props.item.JOBCODE_NM} </span>
-                                </dd>
-                            </dl>
-                            <dl>
-                                <dt>모집인원</dt>
-                                <dd>{this.props.item.RCRIT_NMPR_CO}</dd>
-                                <dt>마감일</dt>
-                                <dd>{this.props.item.RCEPT_CLOS_NM}</dd>
+                                <dd>{this.props.item.JOBCODE_NM}</dd>
                             </dl>
                             <dl>
                                 <dt>모집정보</dt>
-                                <dt>모집직종</dt>
-                                <dd>{this.props.item.JOBCODE_NM}</dd>
-                                <dt>모집인원</dt>
-                                <dd>{this.props.item.RCRIT_NMPR_CO}</dd>
-                                <dt>직무내용</dt>
-                                <dd>{this.props.item.DTY_CN}</dd>
+                                <dd><strong>모집직종 </strong>{this.props.item.JOBCODE_NM}</dd>
+                                <dd><strong>모집인원 </strong>{this.props.item.RCRIT_NMPR_CO}</dd>
+                                <dd>
+                                    <strong>직무내용</strong>
+                                    <div className="jobContent">{this.props.item.DTY_CN}</div></dd>
                             </dl>
                             <dl>
                                 <dt>근무조건</dt>
-                                <dt>학력</dt>
-                                <dd>{this.props.item.ACDMCR_NM}</dd>
-                                <dt>경력조건</dt>
-                                <dd>{this.props.item.CAREER_CND_NM}</dd>
-                                <dt>고용형태</dt>
-                                <dd>{this.props.item.EMPLYM_STLE_CMMN_MM}</dd>
-                                <dt>급여조건</dt>
-                                <dd>{this.props.item.HOPE_WAGE}</dd>
-                                <dt>근무시간</dt>
-                                <dd>{this.props.item.WORK_TIME_NM}</dd>
-                                <dt>근무형태</dt>
-                                <dd>{this.props.item.WORK_TM_NM}</dd>
-                                <dt>근무예정지</dt>
-                                <dd>{this.props.item.WORK_PARAR_BASS_ADRES_CN}</dd>
+                                <dd><strong>학력 </strong>{this.props.item.ACDMCR_NM}</dd>
+                                <dd><strong>경력조건 </strong>{this.props.item.CAREER_CND_NM}</dd>
+                                <dd><strong>고용형태 </strong>{this.props.item.EMPLYM_STLE_CMMN_MM}</dd>
+                                <dd><strong>급여조건 </strong>{this.props.item.HOPE_WAGE}</dd>
+                                <dd><strong>근무시간 </strong>{this.props.item.WORK_TIME_NM}</dd>
+                                <dd><strong>근무형태 </strong>{this.props.item.WORK_TM_NM}</dd>
+                                <dd><strong>근무예정지 </strong>{this.props.item.WORK_PARAR_BASS_ADRES_CN}</dd>
                             </dl>
                             <dl>
                                 <dt>복리후생</dt>
-                                <dt>4대보험</dt>
-                                <dd>{this.props.item.JO_FEINSR_SBSCRB_NM}</dd>
-                                <dt>퇴직금</dt>
-                                <dd>{this.props.item.RET_GRANTS_NM}</dd>
-                                <dt>공휴일</dt>
-                                <dd>{this.props.item.HOLIDAY_NM}</dd>
+                                <dd><strong>4대보험 </strong>{this.props.item.JO_FEINSR_SBSCRB_NM}</dd>
+                                <dd><strong>퇴직금 </strong>{this.props.item.RET_GRANTS_NM}</dd>
+                                <dd><strong>공휴일 </strong>{this.props.item.HOLIDAY_NM}</dd>
                             </dl>
                             <dl>
                                 <dt>전형방법</dt>
-                                <dd>{this.props.item.MODEL_MTH_NM}</dd>
+                                <dd><strong>전형방법 </strong>{this.props.item.MODEL_MTH_NM}</dd>
+                            </dl>
+                            <dl>
                                 <dt>접수방법</dt>
-                                <dd>{this.props.item.RCEPT_MTH_NM}</dd>
+                                <dd><strong>접수방법 </strong>{this.props.item.RCEPT_MTH_NM}</dd>
+                                <dd><strong>마감일 </strong>{this.props.item.RCEPT_CLOS_NM}</dd>
+                            </dl>
+                            <dl>
                                 <dt>채용담당</dt>
-                                <dt>담당자 이름</dt>
-                                <dd>{this.props.item.MNGR_NM}</dd>
-                                <dt>담당자 연락처</dt>
-                                <dd>{this.props.item.MNGR_PHON_NO}</dd>
+                                <dd><strong>담당자 이름 </strong>{this.props.item.MNGR_NM}</dd>
+                                <dd><strong>담당자 연락처 </strong>{this.props.item.MNGR_PHON_NO}</dd>
                             </dl>
                             <dl>
                                 <dt>기업정보</dt>
-                                <dt>기업이름</dt>
-                                <dd>{this.props.item.CMPNY_NM}</dd>
-                                <dt>사업요약내용</dt>
-                                <dd>{this.props.item.BSNS_SUMRY_CN}</dd>
-                                <dt>기업주소</dt>
-                                <dd>{this.props.item.BASS_ADRES_CN}</dd>
-                                <dt>인근전철역</dt>
-                                <dd>{this.props.item.SUBWAY_NM}</dd>
+                                <dd><strong>기업이름 </strong>{this.props.item.CMPNY_NM}</dd>
+                                <dd><strong>사업요약내용 </strong>{this.props.item.BSNS_SUMRY_CN}</dd>
+                                <dd><strong>기업주소 </strong>{this.props.item.BASS_ADRES_CN}</dd>
+                                <dd><strong>인근전철역 </strong>{this.props.item.SUBWAY_NM}</dd>
                             </dl>
                         </div>
                 }
