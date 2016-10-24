@@ -12,7 +12,7 @@ import Loading from "./loading/loading";
 import Navi from "./navi/navi";
 import JobFairList from "./list/jobFairList";
 import EmploymentNoticeList from "./list/employmentNoticeList";
-import JobFairDetail from "./detail/jobFairDetail"
+import DetailView from "./detail/DetailView"
 import SeoulApiStore from "../store/seoulApiStore";
 import SeoulApiAction from "../action/seoulApiAction";
 import DetailDataStore from "../store/detailDataStore";
@@ -144,11 +144,13 @@ class Container extends React.Component {
         <div id="container">
           <Loading isLoading={this.state.isLoading}/>
           {
-              this.state.detailType === GD.NAVITYPE.JOBFAIR_DETAIL
+            (this.state.detailType === GD.NAVITYPE.JOBFAIR_DETAIL ||
+            this.state.detailType === GD.NAVITYPE.EMPLOYMENT_NOTICE_DETAIL)
                   ?
-                  <JobFairDetail
-                    item={this.state.detailData}>
-                  </JobFairDetail>
+                  <DetailView
+                    item={this.state.detailData}
+                    type={this.state.detailType}>
+                  </DetailView>
                   :
                   null
           }

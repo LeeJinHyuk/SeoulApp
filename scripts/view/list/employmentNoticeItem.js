@@ -2,12 +2,15 @@
  * Created by eerto_000 on 2016-10-09.
  */
 import React from "react";
+import GD from "../../globalData";
+import DetailDataAction from "../../action/detailDataAction";
 import style from "./employmentNoticeItem.less";
 
 class EmploymentNoticeItem extends React.Component {
     constructor(props) {
         super(props);
-
+        // 아이템 선택 시 이벤트
+        this.selectItem = this.selectItem.bind(this);
     };
 
     componentWillMount() {
@@ -45,9 +48,16 @@ class EmploymentNoticeItem extends React.Component {
 
     };
 
+    selectItem(e) {
+        console.log("[EmploymentNoticeItem] selectItem");
+        DetailDataAction.showDetailPage(GD.TYPE.EMPLOYMENT_NOTICE_DETAIL, this.props.itemData);
+    };
+
     render() {
         return (
-            <div className={"item index_" + this.props.index}>
+            <div
+                className={"item index_" + this.props.index}
+                onClick={this.selectItem}>
                 <span className="companyName">{this.props.itemData.CMPNY_NM}</span>
                 <span className="companyJobCode">{this.props.itemData.JOBCODE_NM}</span>
                 <div className="companyAddress">
