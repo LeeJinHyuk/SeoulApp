@@ -21,8 +21,6 @@ class JobFairDetail extends React.Component {
 
     componentDidMount() {
         console.log("[JobFairDetail] componentDidMount");
-        // 검색조건 팝업 노출 상태일 때 스크롤 이벤트 제어
-        document.getElementsByTagName("html")[0].setAttribute("class", "preventScroll");
     };
 
     componentWillReceiveProps(nextProps) {
@@ -47,8 +45,6 @@ class JobFairDetail extends React.Component {
 
     componentWillUnmount() {
         console.log("[JobFairDetail] componentWillUnmount");
-        // 검색조건 팝업 미노출 상태일 때 스크롤 이벤트 제어 해제
-        document.getElementsByTagName("html")[0].removeAttribute("class", "preventScroll");
     };
 
     insertLocationUrl() {

@@ -32,8 +32,7 @@ class EmploymentNoticePopup extends React.Component {
 
     componentWillMount() {
         console.log("[EmploymentNoticePopup] componentWillMount");
-        // 하위 컴포넌트 스크롤 방지
-        document.getElementsByTagName("html")[0].setAttribute("class", "preventScroll");
+
     };
 
     // componentDidMount() {
@@ -63,8 +62,7 @@ class EmploymentNoticePopup extends React.Component {
 
     componentWillUnmount() {
         console.log("[EmploymentNoticePopup] componentWillUnmount");
-        // 하위 컴포넌트 스크롤 방지 해제
-        document.getElementsByTagName("html")[0].removeAttribute("class");
+
     };
     makeRegionItem() {
         let itemTag = [];
