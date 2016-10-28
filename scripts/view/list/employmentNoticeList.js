@@ -37,6 +37,8 @@ class EmploymentNoticeList extends React.Component {
         this.selectCondition = this.selectCondition.bind(this);
         // 더보기 버튼 선택시 실행 콜백
         this.loadAdditionalData = this.loadAdditionalData.bind(this);
+        // 선택된 지역 항목 노출
+        this.makeSelectedRegionItem = this.makeSelectedRegionItem.bind(this);
     };
 
     componentWillMount() {
@@ -150,6 +152,20 @@ class EmploymentNoticeList extends React.Component {
         return itemTag;
     };
 
+    makeSelectedRegionItem() {
+        let text = "";
+
+        for (let i = 0; i < this.state.selectedCondition.length; i++) {
+            text = text + this.state.selectedCondition[i] + " ";
+        }
+
+        if (text) {
+            return text;
+        } else {
+            return "모든지역";
+        }
+    };
+
     loadAdditionalData(e) {
         if (this.state.maxPrintData < this.state.listData.length) {
             this.setState({
@@ -196,7 +212,7 @@ class EmploymentNoticeList extends React.Component {
                             <div className="bottomTab">
                                 <span>
                                     <strong>검색지역 : </strong>
-                                    {this.state.selectedCondition.length > 0 ? JSON.stringify(this.state.selectedCondition) : "모든지역"}
+                                    {this.makeSelectedRegionItem()}
                                 </span>
                             </div>
                             :
