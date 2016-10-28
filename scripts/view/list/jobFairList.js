@@ -38,6 +38,8 @@ class JobFairList extends React.Component {
         this.setSeletedCondition = this.setSeletedCondition.bind(this);
         // 리스트 모드 변경 팝업에서 선택
         this.selectCondition = this.selectCondition.bind(this);
+        // 뒤로가기 버튼 이벤트
+        this.backButtonEvent = this.backButtonEvent.bind(this);
     };
 
     componentWillMount() {
@@ -47,6 +49,7 @@ class JobFairList extends React.Component {
 
     componentDidMount() {
         console.log("[JobFairList] componentDidMount");
+        document.addEventListener("backbutton", this.backButtonEvent, false);
     };
 
     componentWillReceiveProps(nextProps) {
@@ -70,6 +73,7 @@ class JobFairList extends React.Component {
 
     componentWillUnmount() {
         console.log("[JobFairList] componentWillUnmount");
+        document.removeEventListener("backbutton", this.backButtonEvent, false);
     };
 
     handleDetailData(result, type, typeList) {
@@ -211,6 +215,14 @@ class JobFairList extends React.Component {
                     listMode : GD.JOBLISTMODE.CURRENT_YEAR
                 });
             }
+        }
+    };
+
+    backButtonEvent(e) {
+        if (this.state.conditionMode === true) {
+            this.setState({
+                conditionMode : false
+            });
         }
     };
 

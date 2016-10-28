@@ -9,6 +9,9 @@ const GD = {
         JOBFAIR_DETAIL : "취업박람회 상세보기",
         EMPLOYMENT_DETAIL : "채용공고 상세보기"
     },
+    MESSAGE : {
+        EXIT_NOTIFICATION : "[뒤로가기]를 한번더 누르면 종료됩니다."
+    },
     TYPE : {
         JOBFAIRLIST : "jobFairList",
         EMPLOYMENT_NOTICE_LIST : "employmentNoticeList",

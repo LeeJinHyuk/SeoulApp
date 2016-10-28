@@ -21,6 +21,9 @@ import style from "./container.less";
 class Container extends React.Component {
   constructor(props) {
     super(props);
+    // cordova value
+    this.timerObj;
+
     this.state = {
       isLoading : false,
       naviType : GD.NAVITYPE.JOBFAIR,
@@ -32,6 +35,8 @@ class Container extends React.Component {
     this.handleApiData = this.handleApiData.bind(this);
     // 네비 타입 변경 시 실행될 콜백
     this.changeNaviType = this.changeNaviType.bind(this);
+    // 뒤로가기 버튼 이벤트
+    this.backButtonEvent = this.backButtonEvent.bind(this);
   };
 
   componentWillMount() {
@@ -44,10 +49,12 @@ class Container extends React.Component {
   };
 
   componentDidMount() {
+    let that = this;
     console.log("[Container] componentDidMount");
     // 최상위 컴포넌트 마운트 완료 시 데이터 요청
     SeoulApiAction.getJobFairList(GD.APICALL_TYPE.START);
     SeoulApiAction.getEmploymentNoticeList(GD.APICALL_TYPE.START);
+    document.addEventListener("backbutton", this.backButtonEvent, false);
   };
 
   // componentWillReceiveProps(nextProps) {
@@ -122,6 +129,24 @@ class Container extends React.Component {
       case GD.TITLE.EMPLOYMENT_NOTICE :
         SeoulApiAction.getEmploymentNoticeList(GD.APICALL_TYPE.TAB);
         break;
+    }
+  };
+
+  backButtonEvent(e) {
+    let that = this;
+    if (document.getElementsByClassName("conditionPopup").length === 0 &&
+        document.getElementsByClassName("DetailView").length === 0) {
+      if (navigator && navigator.showToast) {
+        if (this.timerObj) {
+          navigator.app.exitApp();
+        } else {
+          this.timerObj = setTimeout(function() {
+            clearTimeout(that.timerObj);
+            that.timerObj = undefined;
+          }, 1500);
+          navigator.showToast(GD.MESSAGE.EXIT_NOTIFICATION);
+        }
+      } 
     }
   };
 

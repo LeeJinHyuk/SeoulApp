@@ -28,6 +28,8 @@ class EmploymentNoticePopup extends React.Component {
         this.openRegionList = this.openRegionList.bind(this);
         // 검색 버튼 선택
         this.searchData = this.searchData.bind(this);
+        // 뒤로가기 버튼 이벤트
+        this.backButtonEvent = this.backButtonEvent.bind(this);
     };
 
     componentWillMount() {
@@ -35,10 +37,10 @@ class EmploymentNoticePopup extends React.Component {
 
     };
 
-    // componentDidMount() {
-    //     console.log("[EmploymentNoticePopup] componentDidMount");
-    //
-    // };
+    componentDidMount() {
+        console.log("[EmploymentNoticePopup] componentDidMount");
+        document.addEventListener("backbutton", this.backButtonEvent, false);
+    };
 
     // componentWillReceiveProps(nextProps) {
     //     console.log("[EmploymentNoticePopup] componentWillReceiveProps");
@@ -62,7 +64,7 @@ class EmploymentNoticePopup extends React.Component {
 
     componentWillUnmount() {
         console.log("[EmploymentNoticePopup] componentWillUnmount");
-
+        document.removeEventListener("backbutton", this.backButtonEvent, false);
     };
     makeRegionItem() {
         let itemTag = [];
@@ -148,7 +150,6 @@ class EmploymentNoticePopup extends React.Component {
                 });
             }
         }
-
     };
 
     deleteSelectedRegionItem(e) {
@@ -207,6 +208,10 @@ class EmploymentNoticePopup extends React.Component {
         } else {
             this.props.searchCallback(this.props.listData, []);
         }
+    };
+
+    backButtonEvent(e) {
+        this.props.searchCallback();
     };
 
     render() {

@@ -13,6 +13,8 @@ class JobFairDetail extends React.Component {
 
         // 장소 데이터가 html tag 인지 string인지 체크하여 추가
         this.insertLocationUrl = this.insertLocationUrl.bind(this);
+        // 뒤로가기 버튼 이벤트
+        this.backButtonEvent = this.backButtonEvent.bind(this);
     };
 
     componentWillMount() {
@@ -22,6 +24,7 @@ class JobFairDetail extends React.Component {
 
     componentDidMount() {
         console.log("[JobFairDetail] componentDidMount");
+        document.addEventListener("backbutton", this.backButtonEvent, false);
     };
 
     componentWillReceiveProps(nextProps) {
@@ -46,6 +49,7 @@ class JobFairDetail extends React.Component {
 
     componentWillUnmount() {
         console.log("[JobFairDetail] componentWillUnmount");
+        document.removeEventListener("backbutton", this.backButtonEvent, false);
     };
 
     insertLocationUrl() {
@@ -77,6 +81,10 @@ class JobFairDetail extends React.Component {
 
     backButton() {
         console.log("[JobFairDetail] backButton");
+        DetailDataAction.hideDetailPage();
+    };
+
+    backButtonEvent(e) {
         DetailDataAction.hideDetailPage();
     };
 
