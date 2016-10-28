@@ -3,6 +3,7 @@
  */
 import React from "react";
 import GD from "../../globalData";
+import GlobalUtil from "../../utils/globalUtil";
 import DetailDataAction from "../../action/detailDataAction";
 import style from "./DetailView.less";
 
@@ -100,9 +101,9 @@ class JobFairDetail extends React.Component {
                                 <dd>
                                     <strong>일자 </strong>
                                     <span>{this.props.item.JOBFAIR_DATE} </span>
-                                    <span>{this.props.item.JOBFAIR_FRTIME}</span>
+                                    <span>{GlobalUtil.transformTime(this.props.item.JOBFAIR_FRTIME)}</span>
                                     <span> ~ </span>
-                                    <span>{this.props.item.JOBFAIR_EDTIME}</span>
+                                    <span>{GlobalUtil.transformTime(this.props.item.JOBFAIR_EDTIME)}</span>
                                 </dd>
                             </dl>
                             <dl>
