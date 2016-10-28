@@ -65,7 +65,7 @@ class EmploymentNoticeItem extends React.Component {
                     <span>{this.props.itemData.WORK_PARAR_BASS_ADRES_CN}</span>
                 </div>
                 <div className="closingDate">
-                    <strong>마감일 </strong>
+                    <strong>마감기한 </strong>
                     <span>{this.props.itemData.RCEPT_CLOS_NM}</span>
                 </div>
             </div>

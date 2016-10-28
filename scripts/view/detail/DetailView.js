@@ -158,7 +158,7 @@ class JobFairDetail extends React.Component {
                             <dl>
                                 <dt>접수방법</dt>
                                 <dd><strong>접수방법 </strong>{this.props.item.RCEPT_MTH_NM}</dd>
-                                <dd><strong>마감일 </strong>{this.props.item.RCEPT_CLOS_NM}</dd>
+                                <dd><strong>마감기한 </strong>{this.props.item.RCEPT_CLOS_NM}</dd>
                             </dl>
                             <dl>
                                 <dt>채용담당</dt>
