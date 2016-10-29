@@ -7,6 +7,7 @@ import Reflux from "reflux";
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 import GD from "../../globalData";
 import JobFairItem from "./jobFairItem";
+import JobFairPopup from "./popup/jobFairPopup";
 import MoveTopPopup from "./popup/moveTopPopup";
 import DetailView from "../detail/DetailView"
 import DetailDataStore from "../../store/detailDataStore";
@@ -49,7 +50,6 @@ class JobFairList extends React.Component {
 
     componentDidMount() {
         console.log("[JobFairList] componentDidMount");
-        document.addEventListener("backbutton", this.backButtonEvent, false);
     };
 
     componentWillReceiveProps(nextProps) {
@@ -73,7 +73,6 @@ class JobFairList extends React.Component {
 
     componentWillUnmount() {
         console.log("[JobFairList] componentWillUnmount");
-        document.removeEventListener("backbutton", this.backButtonEvent, false);
     };
 
     handleDetailData(result, type, typeList) {
@@ -255,22 +254,12 @@ class JobFairList extends React.Component {
                     {
                         this.state.conditionMode === true
                             ?
-                            <div
-                                className="conditionPopup"
-                                onClick={this.selectCondition}>
-                                <ul>
-                                    <li
-                                        className={"total " + this.setSeletedCondition(GD.JOBLISTMODE.TOTAL)}
-                                        onClick={this.selectCondition}>
-                                        전체기간
-                                    </li>
-                                    <li
-                                        className={"current " + this.setSeletedCondition(GD.JOBLISTMODE.CURRENT_YEAR)}
-                                        onClick={this.selectCondition}>
-                                        {new Date().getFullYear().toString()}
-                                    </li>
-                                </ul>
-                            </div>
+                            <JobFairPopup
+                                selectCondition={this.selectCondition}
+                                setSeletedCondition={this.setSeletedCondition}
+                                backButtonEvent={this.backButtonEvent}>
+                                
+                            </JobFairPopup>
                             :
                             null
                     }
