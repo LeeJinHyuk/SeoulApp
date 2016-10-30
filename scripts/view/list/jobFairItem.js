@@ -14,41 +14,6 @@ class JobFairItem extends React.Component {
         // 아이템 선택 시 이벤트
         this.selectItem = this.selectItem.bind(this);
     };
-
-    componentWillMount() {
-        console.log("[JobFairItem] componentWillMount");
-
-    };
-
-    componentDidMount() {
-        console.log("[JobFairItem] componentDidMount");
-
-    };
-
-    componentWillReceiveProps(nextProps) {
-        console.log("[JobFairItem] componentWillReceiveProps");
-
-    };
-
-    // shouldComponentUpdate(nextProps, nextState) {
-    //     console.log("[JobFairItem] shouldComponentUpdate");
-    //
-    // };
-
-    componentWillUpdate(nextProps, nextState) {
-        console.log("[JobFairItem] componentWillUpdate");
-
-    };
-
-    componentDidUpdate(prevProps, prevState) {
-        console.log("[JobFairItem] componentDidUpdate");
-
-    };
-
-    componentWillUnmount() {
-        console.log("[JobFairItem] componentWillUnmount");
-
-    };
     
     selectItem(e) {
         console.log("[JobFairItem] selectItem");

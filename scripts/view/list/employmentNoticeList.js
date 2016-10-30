@@ -48,37 +48,12 @@ class EmploymentNoticeList extends React.Component {
         });
     };
 
-    // componentDidMount() {
-    //     console.log("[EmploymentNoticeList] componentDidMount");
-    //
-    // };
-
     componentWillReceiveProps(nextProps) {
         console.log("[EmploymentNoticeList] componentWillReceiveProps");
         this.setState({
             listData : nextProps.listData
         });
     };
-
-    // shouldComponentUpdate(nextProps, nextState) {
-    //     console.log("[EmploymentNoticeList] shouldComponentUpdate");
-    //
-    // };
-
-    // componentWillUpdate(nextProps, nextState) {
-    //     console.log("[EmploymentNoticeList] componentWillUpdate");
-    //
-    // };
-
-    // componentDidUpdate(prevProps, prevState) {
-    //     console.log("[EmploymentNoticeList] componentDidUpdate");
-    //
-    // };
-
-    // componentWillUnmount() {
-    //     console.log("[EmploymentNoticeList] componentWillUnmount");
-    //
-    // };
 
     handleDetailData(result, type, typeList) {
         console.log("[EmploymentNoticeList] handleDetailData");

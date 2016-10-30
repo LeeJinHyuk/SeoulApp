@@ -13,41 +13,6 @@ class EmploymentNoticeItem extends React.Component {
         this.selectItem = this.selectItem.bind(this);
     };
 
-    componentWillMount() {
-        console.log("[EmploymentNoticeItem] componentWillMount");
-
-    };
-
-    componentDidMount() {
-        console.log("[EmploymentNoticeItem] componentDidMount");
-
-    };
-
-    componentWillReceiveProps(nextProps) {
-        console.log("[EmploymentNoticeItem] componentWillReceiveProps");
-
-    };
-
-    // shouldComponentUpdate(nextProps, nextState) {
-    //     console.log("[EmploymentNoticeItem] shouldComponentUpdate");
-    //
-    // };
-
-    componentWillUpdate(nextProps, nextState) {
-        console.log("[EmploymentNoticeItem] componentWillUpdate");
-
-    };
-
-    componentDidUpdate(prevProps, prevState) {
-        console.log("[EmploymentNoticeItem] componentDidUpdate");
-
-    };
-
-    componentWillUnmount() {
-        console.log("[EmploymentNoticeItem] componentWillUnmount");
-
-    };
-
     selectItem(e) {
         console.log("[EmploymentNoticeItem] selectItem");
         DetailDataAction.showDetailPage(GD.TYPE.EMPLOYMENT_NOTICE_DETAIL, this.props.itemData);

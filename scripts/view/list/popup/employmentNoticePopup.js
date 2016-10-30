@@ -32,40 +32,16 @@ class EmploymentNoticePopup extends React.Component {
         this.backButtonEvent = this.backButtonEvent.bind(this);
     };
 
-    componentWillMount() {
-        console.log("[EmploymentNoticePopup] componentWillMount");
-
-    };
-
     componentDidMount() {
         console.log("[EmploymentNoticePopup] componentDidMount");
         document.addEventListener("backbutton", this.backButtonEvent, false);
     };
 
-    // componentWillReceiveProps(nextProps) {
-    //     console.log("[EmploymentNoticePopup] componentWillReceiveProps");
-    //
-    // };
-
-    // shouldComponentUpdate(nextProps, nextState) {
-    //     console.log("[EmploymentNoticePopup] shouldComponentUpdate");
-    //
-    // };
-
-    // componentWillUpdate(nextProps, nextState) {
-    //     console.log("[EmploymentNoticePopup] componentWillUpdate");
-    //
-    // };
-    //
-    // componentDidUpdate(prevProps, prevState) {
-    //     console.log("[EmploymentNoticePopup] componentDidUpdate");
-    //
-    // };
-
     componentWillUnmount() {
         console.log("[EmploymentNoticePopup] componentWillUnmount");
         document.removeEventListener("backbutton", this.backButtonEvent, false);
     };
+    
     makeRegionItem() {
         let itemTag = [];
         let that = this;

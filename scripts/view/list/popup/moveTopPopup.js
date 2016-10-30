@@ -21,33 +21,10 @@ class MoveTopPopup extends React.Component {
         this.displayUpButton = this.displayUpButton.bind(this);
     };
 
-    // componentWillMount() {
-    //     console.log("[MoveTopPopup] componentWillMount");
-    //
-    // };
-
     componentDidMount() {
         console.log("[MoveTopPopup] componentDidMount");
         window.addEventListener("scroll", this.displayUpButton);
     };
-
-    // componentWillReceiveProps(nextProps) {
-    //     console.log("[MoveTopPopup] componentWillReceiveProps");
-    //
-    // };
-
-    // shouldComponentUpdate(nextProps, nextState) {
-    //     console.log("[MoveTopPopup] shouldComponentUpdate");
-    //
-    // };
-
-    // componentWillUpdate(nextProps, nextState) {
-    //     console.log("[MoveTopPopup] componentWillUpdate");
-    // };
-    //
-    // componentDidUpdate(prevProps, prevState) {
-    //     console.log("[MoveTopPopup] componentDidUpdate");
-    // };
 
     componentWillUnmount() {
         console.log("[MoveTopPopup] componentWillUnmount");

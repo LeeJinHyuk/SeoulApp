@@ -11,36 +11,11 @@ class JobFairPopup extends React.Component {
         // 뒤로가기 버튼 이벤트
         this.backButtonEvent = this.backButtonEvent.bind(this);
     };
-
-    // componentWillMount() {
-    //     console.log("[JobFairPopup] componentWillMount");
-    //
-    // };
-
+    
     componentDidMount() {
         console.log("[JobFairPopup] componentDidMount");
         document.addEventListener("backbutton", this.backButtonEvent, false);
     };
-
-    // componentWillReceiveProps(nextProps) {
-    //     console.log("[JobFairPopup] componentWillReceiveProps");
-    //
-    // };
-
-    // shouldComponentUpdate(nextProps, nextState) {
-    //     console.log("[JobFairPopup] shouldComponentUpdate");
-    //
-    // };
-
-    // componentWillUpdate(nextProps, nextState) {
-    //     console.log("[JobFairPopup] componentWillUpdate");
-    //
-    // };
-    //
-    // componentDidUpdate(prevProps, prevState) {
-    //     console.log("[JobFairPopup] componentDidUpdate");
-    //
-    // };
 
     componentWillUnmount() {
         console.log("[JobFairPopup] componentWillUnmount");

@@ -43,36 +43,9 @@ class JobFairList extends React.Component {
         this.backButtonEvent = this.backButtonEvent.bind(this);
     };
 
-    componentWillMount() {
-        console.log("[JobFairList] componentWillMount");
-
-    };
-
-    componentDidMount() {
-        console.log("[JobFairList] componentDidMount");
-    };
-
     componentWillReceiveProps(nextProps) {
         console.log("[JobFairList] componentWillReceiveProps");
         this.rearrangeListData(nextProps);
-    };
-
-    // shouldComponentUpdate(nextProps, nextState) {
-    //     console.log("[JobFairList] shouldComponentUpdate");
-    //
-    // };
-
-    componentWillUpdate(nextProps, nextState) {
-        console.log("[JobFairList] componentWillUpdate");
-    };
-
-    // componentDidUpdate(prevProps, prevState) {
-    //     console.log("[JobFairList] componentDidUpdate");
-    //
-    // };
-
-    componentWillUnmount() {
-        console.log("[JobFairList] componentWillUnmount");
     };
 
     handleDetailData(result, type, typeList) {
@@ -168,10 +141,13 @@ class JobFairList extends React.Component {
             }
         }
     };
+
     selectCondition(e) {
         let tmpListData = [];
         let currentYear;
 
+        e.stopPropagation();
+        
         if (e.target.className.indexOf("conditionPopup") > -1) {
             // 배경 선택 시 이벤트. condition popup 만 닫힌다.
             this.setState({
@@ -192,7 +168,6 @@ class JobFairList extends React.Component {
             }
         } else {
             // 현재 년도 선택 시 이벤트.
-            e.stopPropagation();
             if (this.state.listMode === GD.JOBLISTMODE.CURRENT_YEAR) {
                 this.setState({
                     conditionMode : false

@@ -16,35 +16,10 @@ class JobFairDetail extends React.Component {
         // 뒤로가기 버튼 이벤트
         this.backButtonEvent = this.backButtonEvent.bind(this);
     };
-
-    componentWillMount() {
-        console.log("[JobFairDetail] componentWillMount");
-
-    };
-
+    
     componentDidMount() {
         console.log("[JobFairDetail] componentDidMount");
         document.addEventListener("backbutton", this.backButtonEvent, false);
-    };
-
-    componentWillReceiveProps(nextProps) {
-        console.log("[JobFairDetail] componentWillReceiveProps");
-
-    };
-
-    // shouldComponentUpdate(nextProps, nextState) {
-    //     console.log("[JobFairDetail] shouldComponentUpdate");
-    //
-    // };
-
-    componentWillUpdate(nextProps, nextState) {
-        console.log("[JobFairDetail] componentWillUpdate");
-
-    };
-
-    componentDidUpdate(prevProps, prevState) {
-        console.log("[JobFairDetail] componentDidUpdate");
-
     };
 
     componentWillUnmount() {
@@ -90,7 +65,7 @@ class JobFairDetail extends React.Component {
 
     render() {
         return (
-            <div className="DetailView">
+            <div className="detailView">
                 <div className="detailNavi">
                     <div
                         className="backButton"
@@ -105,7 +80,7 @@ class JobFairDetail extends React.Component {
                         ?
                         <div className="detailList">
                             <dl>
-                                <dt className="DetailViewTitle">{this.props.item.JOBFAIR_NAME}</dt>
+                                <dt className="detailViewTitle">{this.props.item.JOBFAIR_NAME}</dt>
                                 <dd>
                                     <strong>일자 </strong>
                                     <span>{this.props.item.JOBFAIR_DATE} </span>
