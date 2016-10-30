@@ -54,7 +54,7 @@ class JobFairPopup extends React.Component {
     render() {
         return (
             <div
-                className="conditionPopup"
+                className="conditionPopupForJob"
                 onClick={this.props.selectCondition}>
                 <ul>
                     <li
