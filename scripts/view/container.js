@@ -135,6 +135,7 @@ class Container extends React.Component {
   backButtonEvent(e) {
     let that = this;
     if (document.getElementsByClassName("conditionPopup").length === 0 &&
+        document.getElementsByClassName("conditionPopupForJob").length === 0 &&
         document.getElementsByClassName("DetailView").length === 0) {
       if (navigator && navigator.showToast) {
         if (this.timerObj) {
