@@ -57,32 +57,6 @@ class Container extends React.Component {
     document.addEventListener("backbutton", this.backButtonEvent, false);
   };
 
-  // componentWillReceiveProps(nextProps) {
-  //   console.log("[Container] componentWillReceiveProps");
-  //
-  // };
-
-  // shouldComponentUpdate(nextProps, nextState) {
-  //   console.log("[Container] shouldComponentUpdate");
-  //   // 현재 로딩바 노출 상태가 다를 경우에만 랜더링 수행
-  //   return ((this.state.isLoading === nextState.isLoading) ? false : true);
-  // };
-
-  // componentWillUpdate(nextProps, nextState) {
-  //   console.log("[Container] componentWillUpdate");
-  //
-  // };
-  //
-  // componentDidUpdate(prevProps, prevState) {
-  //   console.log("[Container] componentDidUpdate");
-  //
-  // };
-  //
-  // componentWillUnmount() {
-  //   console.log("[Container] componentWillUnmount");
-  //
-  // };
-
   handleApiData(result, type, typeList) {
     console.log("[Container] handleApiData");
     let naviType;
@@ -137,6 +111,8 @@ class Container extends React.Component {
     if (document.getElementsByClassName("conditionPopup").length === 0 &&
         document.getElementsByClassName("conditionPopupForJob").length === 0 &&
         document.getElementsByClassName("DetailView").length === 0) {
+      // 3가지 팝업에 대한 back button event는 각각 팝업에 정의되어 있기 때문에
+      // 기본적인 back button event 로의 종료 이벤트는 container에서 정의
       if (navigator && navigator.showToast) {
         if (this.timerObj) {
           navigator.app.exitApp();

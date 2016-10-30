@@ -7,37 +7,38 @@ import GD from "../globalData";
 import SeoulApiAction from "../action/seoulApiAction";
 
 let SeoulApiStore = Reflux.createStore({
-    listenables : [SeoulApiAction],
+    listenables: [SeoulApiAction],
 
-    init : function() {
+    init: function () {
         let tmpJobFairData = localStorage.getItem(GD.STORAGE_KEY.JOBFAIR);
         let tmpEmploymentNoticeData = localStorage.getItem(GD.STORAGE_KEY.EMPLOYMENT_NOTICE);
-        
+
         this.list = {
-            jobFair : tmpJobFairData !== undefined ? JSON.parse(tmpJobFairData) : undefined, // 채용설명회 리스트 데이터
-            employmentNotice : tmpEmploymentNoticeData !== undefined ? JSON.parse(tmpEmploymentNoticeData) : undefined // 채용공고 리스트 데이터
+            jobFair: tmpJobFairData !== undefined ? JSON.parse(tmpJobFairData) : undefined, // 채용박람회 리스트 데이터
+            employmentNotice: tmpEmploymentNoticeData !== undefined ? JSON.parse(tmpEmploymentNoticeData) : undefined // 채용공고 리스트 데이터
         };
     },
-    ajaxFactory : function(url, dataType, callType) {
+    ajaxFactory: function (url, dataType, callType) {
         let that = this;
+
         $.ajax({
             url: url,
-            dataType : dataType,
-            method : "GET",
-            cache : true,
-            success : function(data, text, xhr) {
+            dataType: dataType,
+            method: "GET",
+            cache: true,
+            success: function (data, text, xhr) {
                 console.log("[SeoulApiStore] success");
                 if (url.indexOf("JobFairInfo") > -1) {
                     if (data && data.JobFairInfo && data.JobFairInfo.RESULT &&
                         data.JobFairInfo.RESULT.CODE === "INFO-000" &&
                         data.JobFairInfo.list_total_count > 0) {
+                        // 취업 박람회 데이터 수신 성공
                         localStorage.setItem(GD.STORAGE_KEY.JOBFAIR, JSON.stringify(data.JobFairInfo.row));
                         that.list.jobFair = data.JobFairInfo.row;
                     } else {
+                        // 취업 박람회 데이터 수신 실패
                         that.list.jobFair = undefined;
                     }
-                    // 취업 설명회 데이터 수신 완료 되더라도 채용 공고 수신이 완료되지 않기 때문에 trigger하지 않는다.
-                    //that.trigger(that.list.jobFair, that.TYPE.JOBFAIRLIST, that.TYPE);
                 } else if (url.indexOf("GetJobInfo") > -1) {
                     let tokenArray;
                     let newUrl;
@@ -47,11 +48,11 @@ let SeoulApiStore = Reflux.createStore({
                         data.GetJobInfo.list_total_count > 0) {
 
                         if (that.list.employmentNotice) {
-                            // 데이터 존재
+                            // 취업 공고 데이터 존재
                             that.list.employmentNotice =
                                 that.list.employmentNotice.concat(data.GetJobInfo.row);
                         } else {
-                            // 데이터 미존재. 첫 시도
+                            // 취업 공고 데이터 미존재. 첫 시도
                             that.list.employmentNotice = data.GetJobInfo.row;
                         }
 
@@ -60,7 +61,7 @@ let SeoulApiStore = Reflux.createStore({
                         newUrl = tokenArray[0] + "/" + tokenArray[1] + "/" + tokenArray[2] + "/" + tokenArray[3] + "/" +
                             tokenArray[4] + "/" + tokenArray[5] + "/" +
                             (Number(tokenArray[6], 10) + 1000) + "/" + (Number(tokenArray[7], 10) + 1000) + "/";
-                        console.log("newUrl : " + newUrl);
+
                         if (data.GetJobInfo.list_total_count > (Number(tokenArray[6], 10) + 1000)) {
                             // 총 데이터가 시작보다 클 경우 추가 요청
                             if (callType === GD.APICALL_TYPE.START) {
@@ -71,18 +72,16 @@ let SeoulApiStore = Reflux.createStore({
                             that.ajaxFactory(newUrl, "jsonp");
                         } else {
                             // 총 데이터가 더 작을 경우 요청 중지
-                            // TODO 지금은 첫요청만 처리하기 때문에 여기서 트리거하는 부분이 없지만
-                            // TODO 새로고침 기능이 추가되면 타입에 따라 여기서도 트리거를 해줘야한다.
                             localStorage.setItem(GD.STORAGE_KEY.EMPLOYMENT_NOTICE, JSON.stringify(that.list.employmentNotice));
                         }
                     } else {
                         that.list.employmentNotice = undefined;
                         that.trigger(that.list.jobFair, GD.TYPE.JOBFAIRLIST, GD.TYPE);
                     }
-                    
+
                 }
             },
-            error : function (xhr, text, error) {
+            error: function (xhr, text, error) {
                 console.log("[SeoulApiStore] error");
             }
         });

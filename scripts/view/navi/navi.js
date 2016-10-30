@@ -11,39 +11,11 @@ class Navi extends React.Component {
 
     };
 
-    // componentWillMount() {
-    //     console.log("[Navi] componentWillMount");
-    // };
-    //
-    // componentDidMount() {
-    //     console.log("[Navi] componentDidMount");
-    //
-    // };
-
-    // componentWillReceiveProps(nextProps) {
-    //     console.log("[Navi] componentWillReceiveProps");
-    // };
-
     shouldComponentUpdate(nextProps, nextState) {
         console.log("[Navi] shouldComponentUpdate");
         // 현재 리스트 보기 모드가 다를 경우에만 랜더링 수행
         return ((this.props.naviType === nextProps.naviType) ? false : true);
     };
-
-    // componentWillUpdate(nextProps, nextState) {
-    //     console.log("[Navi] componentWillUpdate");
-    //
-    // };
-    //
-    // componentDidUpdate(prevProps, prevState) {
-    //     console.log("[Navi] componentDidUpdate");
-    //
-    // };
-    //
-    // componentWillUnmount() {
-    //     console.log("[Navi] componentWillUnmount");
-    //
-    // };
     
     render() {
         let activeJabfair = "";

@@ -9,41 +9,6 @@ class Loading extends React.Component {
 
   };
 
-  // componentWillMount() {
-  //   console.log("[Loading] componentWillMount");
-  //
-  // };
-
-  // componentDidMount() {
-  //   console.log("[Loading] componentDidMount");
-  //
-  // };
-
-  // componentWillReceiveProps(nextProps) {
-  //   console.log("[Loading] componentWillReceiveProps");
-  //
-  // };
-
-  // shouldComponentUpdate(nextProps, nextState) {
-  //   console.log("[Loading] shouldComponentUpdate");
-  //
-  // };
-
-  // componentWillUpdate(nextProps, nextState) {
-  //   console.log("[Loading] componentWillUpdate");
-  //
-  // };
-
-  // componentDidUpdate(prevProps, prevState) {
-  //   console.log("[Loading] componentDidUpdate");
-  //
-  // };
-
-  // componentWillUnmount() {
-  //   console.log("[Loading] componentWillUnmount");
-  //
-  // };
-
   render() {
     return (
         this.props.isLoading 
